@@ -1,19 +1,5 @@
 services:
 
-  app:
-    depends_on:
-      - mongodb
-    build:
-      dockerfile: Dockerfile
-    ports:
-      - 8080:8080
-    expose:
-      - 8080
-    environment:
-      - 'SPRING_PROFILES_ACTIVE=prod'
-    networks:
-      - gff-compose-network
-
   mongo-express:
     image: mongo-express
     depends_on:

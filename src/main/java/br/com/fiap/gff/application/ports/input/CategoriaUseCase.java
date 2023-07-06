@@ -15,6 +15,9 @@ public interface CategoriaUseCase {
 
     Categoria atualizarCategoria(Categoria categoria);
 
+    boolean existeCategoriaPorCodigo(Integer codigo);
+
     void deletarCategoriaPorId(String id);
+
     void deletarCategoriaPorCodigo(Integer codigo);
 }

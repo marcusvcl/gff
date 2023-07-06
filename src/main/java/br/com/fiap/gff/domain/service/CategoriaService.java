@@ -39,6 +39,11 @@ public class CategoriaService implements CategoriaUseCase {
     }
 
     @Override
+    public boolean existeCategoriaPorCodigo(Integer codigo) {
+        return categoriaOutputPort.existeCategoriaPorCodigo(codigo);
+    }
+
+    @Override
     public void deletarCategoriaPorId(String id) {
         categoriaOutputPort.deletarCategoriaPorId(id);
     }

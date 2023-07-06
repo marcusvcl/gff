@@ -2,6 +2,7 @@ package br.com.fiap.gff.infrastructure.adapters.input.rest;
 
 import br.com.fiap.gff.application.ports.input.PedidoUseCase;
 import br.com.fiap.gff.domain.model.Pedido;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/v1")
+@Tag(name = "pedidos")
 @RequiredArgsConstructor
 public class PedidoRestAdapter {
 

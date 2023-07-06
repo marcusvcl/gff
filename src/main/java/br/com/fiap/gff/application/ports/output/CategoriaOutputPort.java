@@ -12,4 +12,5 @@ public interface CategoriaOutputPort {
     Categoria salvarCategoria(Categoria categoria);
     void deletarCategoriaPorCodigo(Integer codigo);
     void deletarCategoriaPorId(String id);
+    boolean existeCategoriaPorCodigo(Integer codigo);
 }

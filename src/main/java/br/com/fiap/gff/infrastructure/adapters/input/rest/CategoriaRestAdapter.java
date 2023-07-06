@@ -2,6 +2,7 @@ package br.com.fiap.gff.infrastructure.adapters.input.rest;
 
 import br.com.fiap.gff.application.ports.input.CategoriaUseCase;
 import br.com.fiap.gff.domain.model.Categoria;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/v1")
+@Tag(name = "categorias")
 @RequiredArgsConstructor
 public class CategoriaRestAdapter {
 

@@ -48,7 +48,7 @@ public class ProdutoPersistenceAdapter implements ProdutoOutputPort {
 
     @Override
     public Collection<Produto> obterProdutoPorCategoria(Integer codigoCategoria) {
-        Optional<Collection<ProdutoEntity>> produtos = repository.findByCodigoCategoria(codigoCategoria);
+        Optional<Collection<ProdutoEntity>> produtos = repository.findByCategoriaCodigo(codigoCategoria);
         return produtos.<Collection<Produto>>map(produtoEntities ->
                 produtoEntities.stream().map(ProdutoEntity::toDomain).toList()).orElse(null);
     }

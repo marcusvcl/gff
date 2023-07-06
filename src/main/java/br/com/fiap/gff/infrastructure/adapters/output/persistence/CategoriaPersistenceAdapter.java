@@ -59,4 +59,9 @@ public class CategoriaPersistenceAdapter implements CategoriaOutputPort {
     public void deletarCategoriaPorId(String id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public boolean existeCategoriaPorCodigo(Integer codigo) {
+        return repository.existsCategoriaEntityByCodigo(codigo);
+    }
 }

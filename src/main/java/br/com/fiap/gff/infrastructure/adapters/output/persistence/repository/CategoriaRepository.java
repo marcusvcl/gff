@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface CategoriaRepository extends MongoRepository<CategoriaEntity, String> {
     Optional<CategoriaEntity> findByCodigo(Integer codigo);
+    boolean existsCategoriaEntityByCodigo(Integer codigo);
     void deleteByCodigo(Integer codigo);
 }

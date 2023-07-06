@@ -14,9 +14,9 @@ public class Produto {
     private String descricao;
     private Double preco;
     private Integer estoque;
-    private Integer codigoCategoria;
+    private Categoria categoria;
 
     public ProdutoEntity toEntity() {
-        return new ProdutoEntity(this.id, this.nome, this.descricao, this.preco, this.estoque, this.codigoCategoria);
+        return new ProdutoEntity(this.id, this.nome, this.descricao, this.preco, this.estoque, this.categoria);
     }
 }
