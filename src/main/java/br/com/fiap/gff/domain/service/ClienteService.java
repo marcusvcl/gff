@@ -2,6 +2,7 @@ package br.com.fiap.gff.domain.service;
 
 import br.com.fiap.gff.application.ports.input.ClienteUseCase;
 import br.com.fiap.gff.application.ports.output.ClienteOutputPort;
+import br.com.fiap.gff.domain.exceptions.RecursoNaoEncontradoException;
 import br.com.fiap.gff.domain.model.Cliente;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,18 @@ public class ClienteService implements ClienteUseCase {
 
     @Override
     public Collection<Cliente> obterTodosClientes() {
-        Optional<Collection<Cliente>> clientes = clienteOutput.obterTodosClientes();
-        return clientes.orElse(null);
+        Collection<Cliente> clientes = clienteOutput.obterTodosClientes();
+        if (clientes == null)
+            throw new RecursoNaoEncontradoException("Nenhum cliente cadastrado no sistema.");
+        return clientes;
     }
 
     @Override
-    public Optional<Cliente> obterClientePorId(String id) {
-        return clienteOutput.obterClientePorId(id);
+    public Cliente obterClientePorId(String id) {
+        Cliente cliente = clienteOutput.obterClientePorId(id);
+        if (cliente == null)
+            throw new RecursoNaoEncontradoException("Não foi encontrado nenhum cliente para o id " + id);
+        return cliente;
     }
 
     @Override

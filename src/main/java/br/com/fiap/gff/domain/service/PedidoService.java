@@ -2,6 +2,7 @@ package br.com.fiap.gff.domain.service;
 
 import br.com.fiap.gff.application.ports.input.PedidoUseCase;
 import br.com.fiap.gff.application.ports.output.PedidoOutputPort;
+import br.com.fiap.gff.domain.exceptions.RecursoNaoEncontradoException;
 import br.com.fiap.gff.domain.model.Pedido;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,18 @@ public class PedidoService implements PedidoUseCase {
 
     @Override
     public Collection<Pedido> obterTodosPedidos() {
-        Optional<Collection<Pedido>> Pedidos = pedidoOutput.obterTodosPedidos();
-        return Pedidos.orElse(null);
+        Collection<Pedido> pedidos = pedidoOutput.obterTodosPedidos();
+        if (pedidos.isEmpty())
+            throw new RecursoNaoEncontradoException("Nenhum pedido cadastrado no sistema.");
+        return pedidos;
     }
 
     @Override
-    public Optional<Pedido> obterPedidoPorId(String id) {
-        return pedidoOutput.obterPedidoPorId(id);
+    public Pedido obterPedidoPorId(String id) {
+        Pedido pedido = pedidoOutput.obterPedidoPorId(id);
+        if (pedido == null)
+            throw new RecursoNaoEncontradoException("Nenhum pedido encontrado com o id " + id + ".");
+        return pedido;
     }
 
     @Override

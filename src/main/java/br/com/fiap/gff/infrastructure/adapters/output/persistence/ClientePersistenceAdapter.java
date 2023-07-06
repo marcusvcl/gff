@@ -35,15 +35,15 @@ public class ClientePersistenceAdapter implements ClienteOutputPort {
     }
 
     @Override
-    public Optional<Cliente> obterClientePorId(String id) {
+    public Cliente obterClientePorId(String id) {
         Optional<ClienteEntity> entity = repository.findById(id);
-        return entity.map(ClienteEntity::toDomain);
+        return entity.map(ClienteEntity::toDomain).orElse(null);
     }
 
     @Override
-    public Optional<Collection<Cliente>> obterTodosClientes() {
+    public Collection<Cliente> obterTodosClientes() {
         List<ClienteEntity> entities = repository.findAll();
-        return Optional.of(entities.stream().map(ClienteEntity::toDomain).toList());
+        return entities.stream().map(ClienteEntity::toDomain).toList();
     }
 
     @Override

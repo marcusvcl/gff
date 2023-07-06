@@ -12,9 +12,9 @@ public interface PedidoOutputPort {
 
     void deletarPedidoPorId(String id);
 
-    Optional<Pedido> obterPedidoPorId(String id);
+    Pedido obterPedidoPorId(String id);
 
-    Optional<Collection<Pedido>> obterTodosPedidos();
+    Collection<Pedido> obterTodosPedidos();
 
     Pedido atualizarPedido(Pedido pedido);
 }

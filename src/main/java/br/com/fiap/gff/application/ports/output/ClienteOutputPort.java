@@ -12,9 +12,9 @@ public interface ClienteOutputPort {
 
     void deletarClientePorId(String id);
 
-    Optional<Cliente> obterClientePorId(String id);
+    Cliente obterClientePorId(String id);
 
-    Optional<Collection<Cliente>> obterTodosClientes();
+    Collection<Cliente> obterTodosClientes();
 
     Cliente atualizarCliente(Cliente Cliente);
 }

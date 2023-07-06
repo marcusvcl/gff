@@ -35,15 +35,15 @@ public class ProdutoPersistenceAdapter implements ProdutoOutputPort {
     }
 
     @Override
-    public Optional<Produto> obterProdutoPorId(String id) {
+    public Produto obterProdutoPorId(String id) {
         Optional<ProdutoEntity> entity = repository.findById(id);
-        return entity.map(ProdutoEntity::toDomain);
+        return entity.map(ProdutoEntity::toDomain).orElse(null);
     }
 
     @Override
-    public Optional<Collection<Produto>> obterTodosProdutos() {
+    public Collection<Produto> obterTodosProdutos() {
         List<ProdutoEntity> entities = repository.findAll();
-        return Optional.of(entities.stream().map(ProdutoEntity::toDomain).toList());
+        return entities.stream().map(ProdutoEntity::toDomain).toList();
     }
 
     @Override

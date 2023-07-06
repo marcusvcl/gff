@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface PedidoUseCase {
     Collection<Pedido> obterTodosPedidos();
-    Optional<Pedido> obterPedidoPorId(String id);
+    Pedido obterPedidoPorId(String id);
     Pedido criarPedido(Pedido pedido);
     Pedido atualizarPedido(Pedido pedido);
     void deletarPedidoPorId(String id);

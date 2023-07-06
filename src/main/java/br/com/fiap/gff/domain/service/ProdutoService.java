@@ -3,6 +3,7 @@ package br.com.fiap.gff.domain.service;
 import br.com.fiap.gff.application.ports.input.ProdutoUseCase;
 import br.com.fiap.gff.application.ports.output.CategoriaOutputPort;
 import br.com.fiap.gff.application.ports.output.ProdutoOutputPort;
+import br.com.fiap.gff.domain.exceptions.RecursoNaoEncontradoException;
 import br.com.fiap.gff.domain.exceptions.RequisicaoInvalidaException;
 import br.com.fiap.gff.domain.model.Categoria;
 import br.com.fiap.gff.domain.model.Produto;
@@ -10,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -21,18 +21,26 @@ public class ProdutoService implements ProdutoUseCase {
 
     @Override
     public Collection<Produto> obterTodosProdutos() {
-        Optional<Collection<Produto>> produtos = produtoOutput.obterTodosProdutos();
-        return produtos.orElse(null);
+        Collection<Produto> produtos = produtoOutput.obterTodosProdutos();
+        if (produtos.isEmpty())
+            throw new RecursoNaoEncontradoException("Não foram encontrados pedidos cadatrados no sistema.");
+        return produtos;
     }
 
     @Override
-    public Optional<Produto> obterProdutoPorId(String id) {
-        return produtoOutput.obterProdutoPorId(id);
+    public Produto obterProdutoPorId(String id) {
+        Produto produto = produtoOutput.obterProdutoPorId(id);
+        if (produto == null)
+            throw new RecursoNaoEncontradoException("Não foi encontrado nenhum produto para o id " + id + ".");
+        return produto;
     }
 
     @Override
     public Collection<Produto> obterProdutoPorCategoria(Integer codigoCategoria) {
-        return produtoOutput.obterProdutoPorCategoria(codigoCategoria);
+        Collection<Produto> produtos = produtoOutput.obterProdutoPorCategoria(codigoCategoria);
+        if (produtos.isEmpty())
+            throw new RecursoNaoEncontradoException("Não foram encontrados nenhum produto para a categoria " + codigoCategoria + " informada.");
+        return produtos;
     }
 
     @Override

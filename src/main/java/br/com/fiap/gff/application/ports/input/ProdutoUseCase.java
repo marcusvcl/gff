@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ProdutoUseCase {
     Collection<Produto> obterTodosProdutos();
-    Optional<Produto> obterProdutoPorId(String id);
+    Produto obterProdutoPorId(String id);
     Collection<Produto> obterProdutoPorCategoria(Integer codigoCategoria);
     Produto criarProduto(Produto produto);
     Produto atualizarProduto(Produto produto);

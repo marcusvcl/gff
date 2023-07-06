@@ -2,6 +2,7 @@ package br.com.fiap.gff.domain.service;
 
 import br.com.fiap.gff.application.ports.input.CategoriaUseCase;
 import br.com.fiap.gff.application.ports.output.CategoriaOutputPort;
+import br.com.fiap.gff.domain.exceptions.RecursoNaoEncontradoException;
 import br.com.fiap.gff.domain.exceptions.RequisicaoInvalidaException;
 import br.com.fiap.gff.domain.model.Categoria;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +22,18 @@ public class CategoriaService implements CategoriaUseCase {
 
     @Override
     public Categoria obterCategoriaPorId(String id) {
-        return categoriaOutputPort.obterCategoriaPorId(id);
+        Categoria categoria = categoriaOutputPort.obterCategoriaPorId(id);
+        if (categoria == null)
+            throw new RecursoNaoEncontradoException("Não foi encontrado nenhuma categoria para o id " + id);
+        return categoria;
     }
 
     @Override
     public Categoria obterCategoriaPorCodigo(Integer codigo) {
-        return categoriaOutputPort.obterCategoriaPorCodigo(codigo);
+        Categoria categoria = categoriaOutputPort.obterCategoriaPorCodigo(codigo);
+        if (categoria == null)
+            throw new RecursoNaoEncontradoException("Não foi encontrado nenhuma categoria para o codigo " + codigo.toString());
+        return categoria;
     }
 
     @Override

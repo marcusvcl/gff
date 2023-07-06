@@ -12,9 +12,9 @@ public interface ProdutoOutputPort {
 
     void deletarProdutoPorId(String id);
 
-    Optional<Produto> obterProdutoPorId(String id);
+    Produto obterProdutoPorId(String id);
 
-    Optional<Collection<Produto>> obterTodosProdutos();
+    Collection<Produto> obterTodosProdutos();
 
     Collection<Produto> obterProdutoPorCategoria(Integer codigoCategoria);
 

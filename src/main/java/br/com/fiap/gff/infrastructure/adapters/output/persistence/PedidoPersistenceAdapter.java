@@ -35,15 +35,15 @@ public class PedidoPersistenceAdapter implements PedidoOutputPort {
     }
 
     @Override
-    public Optional<Pedido> obterPedidoPorId(String id) {
+    public Pedido obterPedidoPorId(String id) {
         Optional<PedidoEntity> entity = repository.findById(id);
-        return entity.map(PedidoEntity::toDomain);
+        return entity.map(PedidoEntity::toDomain).orElse(null);
     }
 
     @Override
-    public Optional<Collection<Pedido>> obterTodosPedidos() {
+    public Collection<Pedido> obterTodosPedidos() {
         List<PedidoEntity> entities = repository.findAll();
-        return Optional.of(entities.stream().map(PedidoEntity::toDomain).toList());
+        return entities.stream().map(PedidoEntity::toDomain).toList();
     }
 
     @Override
