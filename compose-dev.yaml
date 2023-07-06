@@ -2,8 +2,6 @@ services:
 
   mongo-express:
     image: mongo-express
-    depends_on:
-      - mongodb
     ports:
       - 8081:8081
     environment:
@@ -25,7 +23,9 @@ services:
     ports:
       - '27017:27017'
     volumes:
-      - data:/data/db
+      - type: volume
+        source: mongodata
+        target: /data/db
     networks:
       - gff-compose-network
 
@@ -34,4 +34,4 @@ networks:
     driver: bridge
 
 volumes:
-  data:
+  mongodata:

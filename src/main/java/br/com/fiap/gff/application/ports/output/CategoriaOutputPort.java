@@ -8,6 +8,7 @@ public interface CategoriaOutputPort {
     Categoria obterCategoriaPorId(String id);
     Categoria obterCategoriaPorCodigo(Integer codigo);
     Collection<Categoria> obterTodasCategorias();
+    Integer obterUltimoCodigo();
     Categoria atualizarCategoria(Categoria categoria);
     Categoria salvarCategoria(Categoria categoria);
     void deletarCategoriaPorCodigo(Integer codigo);

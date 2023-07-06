@@ -35,6 +35,14 @@ public class CategoriaPersistenceAdapter implements CategoriaOutputPort {
     }
 
     @Override
+    public Integer obterUltimoCodigo() {
+        Optional<CategoriaEntity> categoria = repository.findFirstByOrderByCodigoDesc();
+        if (categoria.isEmpty())
+            return 0;
+        return categoria.get().getCodigo();
+    }
+
+    @Override
     public Categoria atualizarCategoria(Categoria categoria) {
         Optional<CategoriaEntity> categoriaAnterior = repository.findById(categoria.getId());
         if (categoriaAnterior.isEmpty())

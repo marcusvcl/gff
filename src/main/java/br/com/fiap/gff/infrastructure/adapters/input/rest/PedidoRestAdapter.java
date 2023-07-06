@@ -2,6 +2,7 @@ package br.com.fiap.gff.infrastructure.adapters.input.rest;
 
 import br.com.fiap.gff.application.ports.input.PedidoUseCase;
 import br.com.fiap.gff.domain.model.Pedido;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,12 +20,14 @@ public class PedidoRestAdapter {
     private final PedidoUseCase useCase;
 
     @PostMapping(value = "/pedidos")
+    @Operation(summary = "Cria um pedido a partir dos dados informados.")
     public ResponseEntity<Pedido> criarPedido(@RequestBody Pedido pedido) {
         pedido = useCase.criarPedido(pedido);
         return new ResponseEntity<>(pedido, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/pedidos")
+    @Operation(summary = "Lista todos os pedidos por ordem de data.")
     public ResponseEntity<Collection<Pedido>> obterTodosPedidos() {
         Collection<Pedido> Pedidos = useCase.obterTodosPedidos();
         return new ResponseEntity<>(Pedidos, HttpStatus.OK);

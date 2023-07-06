@@ -2,6 +2,7 @@ package br.com.fiap.gff.domain.service;
 
 import br.com.fiap.gff.application.ports.input.CategoriaUseCase;
 import br.com.fiap.gff.application.ports.output.CategoriaOutputPort;
+import br.com.fiap.gff.domain.exceptions.RequisicaoInvalidaException;
 import br.com.fiap.gff.domain.model.Categoria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,13 @@ public class CategoriaService implements CategoriaUseCase {
 
     @Override
     public Categoria criarCategoria(Categoria categoria) {
+        // Verifica se já existe uma categoria com o mesmo código na base
+        // Caso sim, lançar uma exceção de requisição inválida
+        boolean existeCategoria = categoriaOutputPort.existeCategoriaPorCodigo(categoria.getCodigo());
+        if (existeCategoria)
+            throw new RequisicaoInvalidaException("Já existe uma categoria com esse código");
+        Integer ultimoCodigo = categoriaOutputPort.obterUltimoCodigo();
+        categoria.setCodigo(ultimoCodigo+1);
         return categoriaOutputPort.salvarCategoria(categoria);
     }
 

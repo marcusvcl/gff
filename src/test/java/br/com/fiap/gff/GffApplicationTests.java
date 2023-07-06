@@ -1,13 +1,10 @@
 package br.com.fiap.gff;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {GffApplication.class})
+@SpringBootTest
 class GffApplicationTests {
 
     @Test
