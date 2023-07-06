@@ -23,7 +23,7 @@ public class ProdutoService implements ProdutoUseCase {
     public Collection<Produto> obterTodosProdutos() {
         Collection<Produto> produtos = produtoOutput.obterTodosProdutos();
         if (produtos.isEmpty())
-            throw new RecursoNaoEncontradoException("Não foram encontrados pedidos cadatrados no sistema.");
+            throw new RecursoNaoEncontradoException("Não foram encontrados produtos cadatrados no sistema.");
         return produtos;
     }
 

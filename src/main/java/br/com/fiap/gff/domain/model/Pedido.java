@@ -25,7 +25,7 @@ public class Pedido {
 
     public void adicionarItem(ItemPedido item) {
         if (this.items == null)
-            this.items = new ArrayList<ItemPedido>();
+            this.items = new ArrayList<>();
         items.add(item);
     }
 
