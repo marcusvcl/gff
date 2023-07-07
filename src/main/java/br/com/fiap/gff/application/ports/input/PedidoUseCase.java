@@ -9,6 +9,7 @@ public interface PedidoUseCase {
     Pedido obterPedidoPorId(String id);
     Pedido criarPedido(Pedido pedido);
     Pedido atualizarPedido(Pedido pedido);
+    Pedido atualizarStatusPedido(String id, String status);
     Pedido removerItemPedido(String pedidoId, String produtoId);
     Pedido realizarCheckout(String id);
     void deletarPedidoPorId(String id);

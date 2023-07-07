@@ -64,8 +64,7 @@ public class PedidoRestAdapter {
     @PutMapping(value = "/pedidos/{id}/status/{statusPedido}")
     @Operation(summary = "Atualiza o status de um pedido a partir dos dados informados.")
     public ResponseEntity<Pedido> atualizarStatusPedido(@PathVariable String id, @PathVariable String statusPedido) {
-        var pedido = new Pedido();
-        return new ResponseEntity<>(pedido, HttpStatus.NO_CONTENT);
+        var pedido = useCase.atualizarStatusPedido(id, statusPedido);
+        return new ResponseEntity<>(pedido, HttpStatus.OK);
     }
-
 }

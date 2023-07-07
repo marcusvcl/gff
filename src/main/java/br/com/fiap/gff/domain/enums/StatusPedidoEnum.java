@@ -7,11 +7,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum StatusPedidoEnum {
     RECEBIDO(1),
-    AGUARDANDOPAGAMENTO(2),
-    PREPARACAO(3),
-    PRONTO(4),
-    FINALIZADO(5),
-    CANCELADO(6);
+    PREPARACAO(2),
+    PRONTO(3),
+    FINALIZADO(4),
+    CANCELADO(5);
 
     public final Integer ordem;
 

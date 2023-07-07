@@ -1,8 +1,10 @@
 package br.com.fiap.gff.domain.models;
 
-import br.com.fiap.gff.domain.enums.TipoDePagamentoEnum;
+import br.com.fiap.gff.domain.enums.StatusPedidoEnum;
+import br.com.fiap.gff.domain.exceptions.RequisicaoInvalidaException;
 import br.com.fiap.gff.domain.valueObjects.ClientePedido;
 import br.com.fiap.gff.domain.valueObjects.ItemPedido;
+import br.com.fiap.gff.domain.valueObjects.PagamentoPedido;
 import br.com.fiap.gff.domain.valueObjects.StatusPedido;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +23,7 @@ public class Pedido {
     private ClientePedido cliente;
     private Collection<ItemPedido> items;
     private StatusPedido status;
-    private TipoDePagamentoEnum tipoPagamento;
+    private PagamentoPedido pagamento;
     private Double totalPedido;
     private LocalDateTime dataPedido;
 
@@ -51,6 +53,16 @@ public class Pedido {
             return;
         }
         this.totalPedido = items.stream().map(ItemPedido::getPreco).reduce(0d, Double::sum);
+    }
+
+    public void atualizarStatus(String status) {
+        StatusPedidoEnum s;
+        try {
+            s = StatusPedidoEnum.valueOf(status);
+        } catch (IllegalArgumentException e) {
+            throw new RequisicaoInvalidaException("O status informado é inválido. Por favor repita a operação com um status válido.");
+        }
+        this.status.setStatus(s);
     }
 }
 

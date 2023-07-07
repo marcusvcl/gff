@@ -3,6 +3,7 @@ package br.com.fiap.gff.infrastructure.adapters.output.persistence;
 import br.com.fiap.gff.application.ports.output.ProdutoOutputPort;
 import br.com.fiap.gff.domain.models.Produto;
 import br.com.fiap.gff.infrastructure.adapters.output.persistence.entities.ProdutoEntity;
+import br.com.fiap.gff.infrastructure.adapters.output.persistence.mappers.ProdutoPersistenceMapper;
 import br.com.fiap.gff.infrastructure.adapters.output.persistence.repositories.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,16 +17,17 @@ import java.util.Optional;
 public class ProdutoPersistenceAdapter implements ProdutoOutputPort {
 
     private final ProdutoRepository repository;
+    private final ProdutoPersistenceMapper mapper;
 
     @Override
     public Produto salvarProduto(Produto produto) {
-        ProdutoEntity entity = produto.toEntity();
-        return repository.save(entity).toDomain();
+        ProdutoEntity entity = mapper.toEntity(produto);
+        return mapper.toModel(repository.save(entity));
     }
 
     @Override
     public void deletarProduto(Produto produto) {
-        ProdutoEntity entity = produto.toEntity();
+        ProdutoEntity entity = mapper.toEntity(produto);
         repository.delete(entity);
     }
 
@@ -37,20 +39,20 @@ public class ProdutoPersistenceAdapter implements ProdutoOutputPort {
     @Override
     public Produto obterProdutoPorId(String id) {
         Optional<ProdutoEntity> entity = repository.findById(id);
-        return entity.map(ProdutoEntity::toDomain).orElse(null);
+        return entity.map(mapper::toModel).orElse(null);
     }
 
     @Override
     public Collection<Produto> obterTodosProdutos() {
         List<ProdutoEntity> entities = repository.findAll();
-        return entities.stream().map(ProdutoEntity::toDomain).toList();
+        return entities.stream().map(mapper::toModel).toList();
     }
 
     @Override
     public Collection<Produto> obterProdutoPorCategoria(Integer codigoCategoria) {
         Optional<Collection<ProdutoEntity>> produtos = repository.findByCategoriaCodigo(codigoCategoria);
         return produtos.<Collection<Produto>>map(produtoEntities ->
-                produtoEntities.stream().map(ProdutoEntity::toDomain).toList()).orElse(null);
+                produtoEntities.stream().map(mapper::toModel).toList()).orElse(null);
     }
 
     @Override
@@ -58,7 +60,7 @@ public class ProdutoPersistenceAdapter implements ProdutoOutputPort {
         Optional<ProdutoEntity> produtoAntigo = repository.findById(produto.getId());
         if (produtoAntigo.isEmpty())
             throw new RuntimeException("Falha ao atualizar o produto");
-        produtoAntigo.ifPresent(produtoEntity -> produtoEntity.updateEntityFromDomain(produto));
-        return produtoAntigo.get().toDomain();
+        produtoAntigo.ifPresent(produtoEntity -> mapper.updateEntityFromModel(produto, produtoEntity));
+        return mapper.toModel(produtoAntigo.get());
     }
 }

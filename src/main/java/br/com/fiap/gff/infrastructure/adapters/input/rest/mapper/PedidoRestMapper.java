@@ -12,6 +12,7 @@ public interface PedidoRestMapper {
     @Mapping(target = "status.status", source = "status")
     @Mapping(target = "cliente.id", source = "clienteId")
     @Mapping(target = "cliente.apelido", source = "clienteApelido")
+    @Mapping(target = "pagamento.tipoDePagamento", source = "tipoPagamento")
     Pedido toModel(CreatePedidoRequest request);
     Pedido toModel(UpdatePedidoRequest request);
 }

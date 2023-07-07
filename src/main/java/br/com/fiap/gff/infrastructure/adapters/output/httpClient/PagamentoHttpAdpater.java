@@ -22,12 +22,14 @@ public class PagamentoHttpAdpater implements PagamentoUseCase {
     public Pedido executarPagamento(Pedido pedido) {
         var request = new PagamentoRequest();
         request.setPedidoId(pedido.getId());
-        request.setTipoDePagamento(pedido.getTipoPagamento());
+        request.setTipoDePagamento(pedido.getPagamento().getTipoDePagamento());
         request.setValorAPagar(pedido.getTotalPedido());
         request.setSituacao("PENDENTE");
         request.setAuth(new PagamentoRequest.Auth());
         var response = enviarPagamentoAoParceiro(request);
-        outputPort.salvarPagamento(mapper.toModel(response));
+        var pagamento = outputPort.salvarPagamento(mapper.toModel(response));
+        pedido.getPagamento().setValorPago(pagamento.getValorPago());
+        pedido.getPagamento().setTransacaoId(pagamento.getTransacaoId());
         return pedido;
     }
 

@@ -60,6 +60,13 @@ public class PedidoService implements PedidoUseCase {
     }
 
     @Override
+    public Pedido atualizarStatusPedido(String id, String status) {
+        var pedidoAnterior = obterPedidoPorId(id);
+        pedidoAnterior.atualizarStatus(status);
+        return pedidoOutput.atualizarPedido(pedidoAnterior);
+    }
+
+    @Override
     public Pedido removerItemPedido(String pedidoId, String produtoId) {
         var pedidoAnterior = obterPedidoPorId(pedidoId);
         pedidoAnterior.removerItem(produtoId);
@@ -70,7 +77,8 @@ public class PedidoService implements PedidoUseCase {
     @Override
     public Pedido realizarCheckout(String id) {
         var pedido = obterPedidoPorId(id);
-        return pagamentoUseCase.executarPagamento(pedido);
+        pedido = pagamentoUseCase.executarPagamento(pedido);
+        return pedidoOutput.atualizarPedido(pedido);
     }
 
     @Override

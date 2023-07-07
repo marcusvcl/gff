@@ -23,7 +23,7 @@ public class PedidoEntity implements Serializable {
     private Cliente cliente;
     private Collection<Item> items;
     private Status status;
-    private TipoDePagamentoEnum tipoPagamento;
+    private Pagamento pagamento;
     private Double totalPedido;
     private LocalDateTime dataPedido;
 
@@ -52,5 +52,14 @@ public class PedidoEntity implements Serializable {
     public static class Status {
         private StatusPedidoEnum status;
         private String descricao;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Pagamento {
+        private TipoDePagamentoEnum tipoDePagamento;
+        private String transacaoId;
+        private double valorPago;
     }
 }
