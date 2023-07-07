@@ -1,8 +1,8 @@
 package br.com.fiap.gff.infrastructure.adapters.input.rest;
 
 import br.com.fiap.gff.application.ports.input.CategoriaUseCase;
-import br.com.fiap.gff.domain.model.Categoria;
-import br.com.fiap.gff.infrastructure.adapters.input.rest.data.request.CategoriaCreateRequest;
+import br.com.fiap.gff.domain.models.Categoria;
+import br.com.fiap.gff.infrastructure.adapters.input.rest.data.request.CreateCategoriaRequest;
 import br.com.fiap.gff.infrastructure.adapters.input.rest.mapper.CategoriaRestMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -46,7 +46,7 @@ public class CategoriaRestAdapter {
 
     @Operation(summary = "Cria uma categoria a partir do contrato abaixo.")
     @PostMapping(value = "/categoria")
-    public ResponseEntity<Categoria> criarCategoria(@RequestBody CategoriaCreateRequest request) {
+    public ResponseEntity<Categoria> criarCategoria(@RequestBody CreateCategoriaRequest request) {
         Categoria categoria = mapper.toDomain(request);
         categoria = useCase.criarCategoria(categoria);
         return new ResponseEntity<>(categoria, HttpStatus.CREATED);

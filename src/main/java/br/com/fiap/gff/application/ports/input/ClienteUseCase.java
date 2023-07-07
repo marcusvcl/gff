@@ -1,9 +1,8 @@
 package br.com.fiap.gff.application.ports.input;
 
-import br.com.fiap.gff.domain.model.Cliente;
+import br.com.fiap.gff.domain.models.Cliente;
 
 import java.util.Collection;
-import java.util.Optional;
 
 public interface ClienteUseCase {
     Collection<Cliente> obterTodosClientes();

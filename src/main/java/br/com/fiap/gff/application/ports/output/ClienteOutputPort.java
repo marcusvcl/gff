@@ -1,9 +1,8 @@
 package br.com.fiap.gff.application.ports.output;
 
-import br.com.fiap.gff.domain.model.Cliente;
+import br.com.fiap.gff.domain.models.Cliente;
 
 import java.util.Collection;
-import java.util.Optional;
 
 public interface ClienteOutputPort {
     Cliente salvarCliente(Cliente cliente);

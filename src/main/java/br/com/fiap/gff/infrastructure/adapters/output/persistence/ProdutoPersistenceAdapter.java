@@ -1,9 +1,9 @@
 package br.com.fiap.gff.infrastructure.adapters.output.persistence;
 
 import br.com.fiap.gff.application.ports.output.ProdutoOutputPort;
-import br.com.fiap.gff.domain.model.Produto;
-import br.com.fiap.gff.infrastructure.adapters.output.persistence.entity.ProdutoEntity;
-import br.com.fiap.gff.infrastructure.adapters.output.persistence.repository.ProdutoRepository;
+import br.com.fiap.gff.domain.models.Produto;
+import br.com.fiap.gff.infrastructure.adapters.output.persistence.entities.ProdutoEntity;
+import br.com.fiap.gff.infrastructure.adapters.output.persistence.repositories.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

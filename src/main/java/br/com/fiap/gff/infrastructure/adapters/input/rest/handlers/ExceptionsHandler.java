@@ -32,4 +32,11 @@ public class ExceptionsHandler {
         MensagemErroResponse mensagemErro = new MensagemErroResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mensagemErro);
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<MensagemErroResponse> notMappedError(RuntimeException ex, HttpServletRequest request) {
+        MensagemErroResponse mensageErro = new MensagemErroResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mensageErro);
+    }
+
 }

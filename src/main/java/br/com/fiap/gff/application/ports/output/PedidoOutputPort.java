@@ -1,9 +1,8 @@
 package br.com.fiap.gff.application.ports.output;
 
-import br.com.fiap.gff.domain.model.Pedido;
+import br.com.fiap.gff.domain.models.Pedido;
 
 import java.util.Collection;
-import java.util.Optional;
 
 public interface PedidoOutputPort {
     Pedido salvarPedido(Pedido pedido);

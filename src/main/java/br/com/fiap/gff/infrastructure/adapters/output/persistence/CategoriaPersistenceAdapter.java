@@ -1,9 +1,10 @@
 package br.com.fiap.gff.infrastructure.adapters.output.persistence;
 
 import br.com.fiap.gff.application.ports.output.CategoriaOutputPort;
-import br.com.fiap.gff.domain.model.Categoria;
-import br.com.fiap.gff.infrastructure.adapters.output.persistence.entity.CategoriaEntity;
-import br.com.fiap.gff.infrastructure.adapters.output.persistence.repository.CategoriaRepository;
+import br.com.fiap.gff.domain.models.Categoria;
+import br.com.fiap.gff.infrastructure.adapters.output.persistence.entities.CategoriaEntity;
+import br.com.fiap.gff.infrastructure.adapters.output.persistence.mappers.CategoriaPersistenceMapper;
+import br.com.fiap.gff.infrastructure.adapters.output.persistence.repositories.CategoriaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,24 +15,26 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CategoriaPersistenceAdapter implements CategoriaOutputPort {
+
     private final CategoriaRepository repository;
+    private final CategoriaPersistenceMapper mapper;
 
     @Override
     public Categoria obterCategoriaPorId(String id) {
         Optional<CategoriaEntity> entity = repository.findById(id);
-        return entity.map(CategoriaEntity::toDomain).orElse(null);
+        return entity.map(mapper::toModel).orElse(null);
     }
 
     @Override
     public Categoria obterCategoriaPorCodigo(Integer codigo) {
         Optional<CategoriaEntity> entity = repository.findByCodigo(codigo);
-        return entity.map(CategoriaEntity::toDomain).orElse(null);
+        return entity.map(mapper::toModel).orElse(null);
     }
 
     @Override
     public Collection<Categoria> obterTodasCategorias() {
         List<CategoriaEntity> entities = repository.findAll();
-        return entities.stream().map(CategoriaEntity::toDomain).toList();
+        return entities.stream().map(mapper::toModel).toList();
     }
 
     @Override
@@ -48,14 +51,14 @@ public class CategoriaPersistenceAdapter implements CategoriaOutputPort {
         if (categoriaAnterior.isEmpty())
             return null; //TODO lançar exceção com falha na atualização do objeto
         CategoriaEntity categoriaAtualizada = categoriaAnterior.get();
-        categoriaAtualizada.updateEntityFromDomain(categoria);
+        mapper.updateEntityFromModel(categoria, categoriaAtualizada);
         repository.save(categoriaAtualizada);
         return categoria;
     }
 
     @Override
     public Categoria salvarCategoria(Categoria categoria) {
-        return repository.insert(categoria.toEntity()).toDomain();
+        return mapper.toModel(repository.insert(mapper.toEntity(categoria)));
     }
 
     @Override

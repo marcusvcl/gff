@@ -1,8 +1,8 @@
 package br.com.fiap.gff.infrastructure.adapters.input.rest;
 
 import br.com.fiap.gff.application.ports.input.ProdutoUseCase;
-import br.com.fiap.gff.domain.model.Produto;
-import br.com.fiap.gff.infrastructure.adapters.input.rest.data.request.ProdutoCreateRequest;
+import br.com.fiap.gff.domain.models.Produto;
+import br.com.fiap.gff.infrastructure.adapters.input.rest.data.request.CreateProdutoRequest;
 import br.com.fiap.gff.infrastructure.adapters.input.rest.mapper.ProdutoRestMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,14 +22,6 @@ public class ProdutoRestAdapter {
     private final ProdutoUseCase produtoUseCase;
     private final ProdutoRestMapper mapper;
 
-    @PostMapping(value = "/produtos")
-    @Operation(summary = "Cria um produto a partir dos dados informados.")
-    public ResponseEntity<Produto> criarProduto(@RequestBody ProdutoCreateRequest request) {
-        Produto domain = mapper.toDomain(request);
-        domain = produtoUseCase.criarProduto(domain);
-        return new ResponseEntity<>(domain, HttpStatus.CREATED);
-    }
-
     @GetMapping(value = "/produtos")
     @Operation(summary = "Lista todos os produtos cadastrados na base.")
     public ResponseEntity<Collection<Produto>> obterTodosProdutos() {
@@ -43,4 +35,13 @@ public class ProdutoRestAdapter {
         Collection<Produto> produtos = produtoUseCase.obterProdutoPorCategoria(codigoCategoria);
         return new ResponseEntity<>(produtos, HttpStatus.OK);
     }
+
+    @PostMapping(value = "/produtos")
+    @Operation(summary = "Cria um produto a partir dos dados informados.")
+    public ResponseEntity<Produto> criarProduto(@RequestBody CreateProdutoRequest request) {
+        Produto domain = mapper.toDomain(request);
+        domain = produtoUseCase.criarProduto(domain);
+        return new ResponseEntity<>(domain, HttpStatus.CREATED);
+    }
+
 }

@@ -1,6 +1,6 @@
 package br.com.fiap.gff.application.ports.output;
 
-import br.com.fiap.gff.domain.model.Categoria;
+import br.com.fiap.gff.domain.models.Categoria;
 
 import java.util.Collection;
 

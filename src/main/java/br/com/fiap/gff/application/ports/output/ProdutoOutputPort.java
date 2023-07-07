@@ -1,9 +1,8 @@
 package br.com.fiap.gff.application.ports.output;
 
-import br.com.fiap.gff.domain.model.Produto;
+import br.com.fiap.gff.domain.models.Produto;
 
 import java.util.Collection;
-import java.util.Optional;
 
 public interface ProdutoOutputPort {
     Produto salvarProduto(Produto produto);
