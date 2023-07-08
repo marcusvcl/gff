@@ -9,7 +9,7 @@ O sistema de gerenciamento de Fast Food tem como objetivo sanar a necessidade de
 
 ## **Tecnologias utilizadas:**
 - [Git](https://git-scm.com/downloads)
-- [Java](https://www.oracle.com/java/)
+- [Java - Versão 17](https://www.oracle.com/java/)
 - [Maven](https://maven.apache.org/)
 - [Docker](https://docs.docker.com/)
 - [MongoDB](https://www.mongodb.com/)
