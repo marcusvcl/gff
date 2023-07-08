@@ -26,6 +26,7 @@ Para buildar a aplicação atarvés do download do programa via git é necessár
 - 2° - Abra o terminal no diretório na qual você fez o download da pasta do programa.
 - 3° - Utilize o comando a seguir para subir a aplicação via docker compose:
 <br>
+
 ```bash
     docker compose -f compose.yaml up
 ```
