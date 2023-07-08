@@ -9,6 +9,7 @@ import java.util.Objects;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class ItemPedido {
     private String produtoId;
     private String nome;

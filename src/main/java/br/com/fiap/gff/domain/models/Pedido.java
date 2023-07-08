@@ -56,6 +56,8 @@ public class Pedido {
     }
 
     public void atualizarStatus(String status) {
+        if (this.status == null)
+            this.status = new StatusPedido();
         StatusPedidoEnum s;
         try {
             s = StatusPedidoEnum.valueOf(status);
