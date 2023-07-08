@@ -60,14 +60,14 @@ public class CategoriaRestAdapter {
     }
 
     @Operation(summary = "Apaga uma categoria pelo id informado.")
-    @DeleteMapping(value = "/categoria/deletar/{id}")
+    @DeleteMapping(value = "/categoria/deletar/id/{id}")
     public ResponseEntity<String> deletarCategoriaPorId(@PathVariable String id) {
         useCase.deletarCategoriaPorId(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     @Operation(summary = "Apaga uma categoria pelo código informado.")
-    @DeleteMapping(value = "/categoria/deletar/{codigo}")
+    @DeleteMapping(value = "/categoria/deletar/codigo/{codigo}")
     public ResponseEntity<Integer> deletarCategoriaPeloCodigo(@PathVariable Integer codigo) {
         useCase.deletarCategoriaPorCodigo(codigo);
         return new ResponseEntity<>(codigo, HttpStatus.OK);
