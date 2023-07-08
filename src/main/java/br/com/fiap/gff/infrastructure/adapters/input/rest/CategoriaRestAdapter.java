@@ -3,6 +3,7 @@ package br.com.fiap.gff.infrastructure.adapters.input.rest;
 import br.com.fiap.gff.application.ports.input.CategoriaUseCase;
 import br.com.fiap.gff.domain.models.Categoria;
 import br.com.fiap.gff.infrastructure.adapters.input.rest.data.request.CreateCategoriaRequest;
+import br.com.fiap.gff.infrastructure.adapters.input.rest.data.request.UpdateCategoriaRequest;
 import br.com.fiap.gff.infrastructure.adapters.input.rest.mapper.CategoriaRestMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,14 +26,14 @@ public class CategoriaRestAdapter {
     @Operation(summary = "Retorna todas as categorias do banco de dados.")
     @GetMapping(value = "/categoria")
     public ResponseEntity<Collection<Categoria>> obterTodasCategorias() {
-        Collection<Categoria> categorias = useCase.obterTodasCategorias();
+        var categorias = useCase.obterTodasCategorias();
         return new ResponseEntity<>(categorias, HttpStatus.OK);
     }
 
     @Operation(summary = "Retorna uma categoria do banco de dados pelo código informado.")
     @GetMapping(value = "/categoria/codigo/{codigo}")
     public ResponseEntity<Categoria> obterCategoriaPeloCodigo(@PathVariable Integer codigo) {
-        Categoria categoria = useCase.obterCategoriaPorCodigo(codigo);
+        var categoria = useCase.obterCategoriaPorCodigo(codigo);
         return new ResponseEntity<>(categoria, HttpStatus.OK);
     }
 
@@ -40,15 +41,35 @@ public class CategoriaRestAdapter {
     @Operation(summary = "Retorna uma cateogoria do banco de dados pelo id informado.")
     @GetMapping(value = "/categoria/id/{id}")
     public ResponseEntity<Categoria> obterCategoriaPeloId(@PathVariable String id) {
-        Categoria categoria = useCase.obterCategoriaPorId(id);
+        var categoria = useCase.obterCategoriaPorId(id);
         return new ResponseEntity<>(categoria, HttpStatus.OK);
     }
 
     @Operation(summary = "Cria uma categoria a partir do contrato abaixo.")
     @PostMapping(value = "/categoria")
     public ResponseEntity<Categoria> criarCategoria(@RequestBody CreateCategoriaRequest request) {
-        Categoria categoria = mapper.toDomain(request);
+        var categoria = mapper.toModel(request);
         categoria = useCase.criarCategoria(categoria);
         return new ResponseEntity<>(categoria, HttpStatus.CREATED);
+    }
+
+    public ResponseEntity<Categoria> atualizarCategoria(@RequestBody UpdateCategoriaRequest request) {
+        var categoria = mapper.toModel(request);
+        categoria = useCase.atualizarCategoria(categoria);
+        return new ResponseEntity<>(categoria, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Apaga uma categoria pelo id informado.")
+    @DeleteMapping(value = "/categoria/deletar/{id}")
+    public ResponseEntity<String> deletarCategoriaPorId(@PathVariable String id) {
+        useCase.deletarCategoriaPorId(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Apaga uma categoria pelo código informado.")
+    @DeleteMapping(value = "/categoria/deletar/{codigo}")
+    public ResponseEntity<Integer> deletarCategoriaPeloCodigo(@PathVariable Integer codigo) {
+        useCase.deletarCategoriaPorCodigo(codigo);
+        return new ResponseEntity<>(codigo, HttpStatus.OK);
     }
 }
