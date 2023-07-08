@@ -3,11 +3,11 @@
 Sistema de Genrenciamento de Fast Food.
 
 
-## **Objetivo**: 
+## **Objetivo**
 O sistema de gerenciamento de Fast Food tem como objetivo sanar a necessidade de um melhor gerenciamento dos pedidos de um estabelecimento, trazendo uma melhor eficiência com a organização dos pedidos.
 
 
-## **Tecnologias utilizadas:**
+## **Tecnologias utilizadas**
 - [Git](https://git-scm.com/downloads)
 - [Java - Versão 17](https://www.oracle.com/java/)
 - [Maven](https://maven.apache.org/)
@@ -18,7 +18,7 @@ O sistema de gerenciamento de Fast Food tem como objetivo sanar a necessidade de
 
 <br>
 
-## **Buildando a Aplicação:**
+## **Subindo a Aplicação**
 
 Para buildar a aplicação atarvés do download do programa via git é necessário seguir alguns passos:
 <br>
