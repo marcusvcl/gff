@@ -14,7 +14,7 @@ O sistema de gerenciamento de Fast Food tem como objetivo sanar a necessidade de
 - [Docker](https://docs.docker.com/)
 - [MongoDB](https://www.mongodb.com/)
 - [Swagger](https://swagger.io/docs/specification/about/)
-- [Composer](https://getcomposer.org/)
+- [Docker Composer](https://docs.docker.com/compose/install/)
 
 <br>
 
