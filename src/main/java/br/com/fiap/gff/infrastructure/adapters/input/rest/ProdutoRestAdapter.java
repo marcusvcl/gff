@@ -52,10 +52,11 @@ public class ProdutoRestAdapter {
         return new ResponseEntity<>(produto, HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/produtos")
+    @PutMapping(value = "/produtos/{id}")
     @Operation(summary = "Atualiza um produto a partir dos dados informados.")
-    public ResponseEntity<Produto> atualizarProduto(@RequestBody UpdateProdutoRequest request) {
+    public ResponseEntity<Produto> atualizarProduto(@PathVariable String id, @RequestBody UpdateProdutoRequest request) {
         var produto = produtoUseCase.atualizarProduto(mapper.toModel(request));
+        produto.setId(id);
         return new ResponseEntity<>(produto, HttpStatus.OK);
     }
 

@@ -17,7 +17,10 @@ public class CategoriaService implements CategoriaUseCase {
     private final CategoriaOutputPort categoriaOutputPort;
     @Override
     public Collection<Categoria> obterTodasCategorias() {
-        return categoriaOutputPort.obterTodasCategorias();
+        var categorias = categoriaOutputPort.obterTodasCategorias();
+        if (categorias == null)
+            throw new RecursoNaoEncontradoException("Nenhuma categoria encontrada na base.");
+        return categorias;
     }
 
     @Override
