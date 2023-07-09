@@ -39,7 +39,7 @@ public class PedidoRestAdapter {
     }
 
     @PostMapping(value = "/pedidos/{id}/checkout")
-    @Operation(summary = "Cria um pedido a partir dos dados informados.")
+    @Operation(summary = "Envia o pedido informado para pagamento.")
     public ResponseEntity<Pedido> checkoutPedido(@PathVariable String id) {
         var pedido = useCase.realizarCheckout(id);
         return new ResponseEntity<>(pedido, HttpStatus.OK);

@@ -18,7 +18,7 @@ public class ExceptionsHandler {
     @ExceptionHandler(RecursoNaoEncontradoException.class)
     public ResponseEntity<MensagemErroResponse> notFoundError(RecursoNaoEncontradoException ex, HttpServletRequest request) {
         MensagemErroResponse mensagemErro = new MensagemErroResponse(HttpStatus.NO_CONTENT.value(), ex.getMessage(), System.currentTimeMillis());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensagemErro);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(mensagemErro);
     }
 
     @ExceptionHandler(RecursoJaExisteException.class)

@@ -18,7 +18,7 @@ public class ClienteService implements ClienteUseCase {
     @Override
     public Collection<Cliente> obterTodosClientes() {
         var clientes = clienteOutput.obterTodosClientes();
-        if (clientes == null)
+        if (clientes == null || clientes.size() == 0)
             throw new RecursoNaoEncontradoException("Nenhum cliente cadastrado no sistema.");
         return clientes;
     }

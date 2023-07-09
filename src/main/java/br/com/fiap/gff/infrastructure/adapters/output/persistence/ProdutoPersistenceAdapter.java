@@ -61,6 +61,7 @@ public class ProdutoPersistenceAdapter implements ProdutoOutputPort {
         if (produtoAntigo.isEmpty())
             throw new RuntimeException("Falha ao atualizar o produto");
         produtoAntigo.ifPresent(produtoEntity -> mapper.updateEntityFromModel(produto, produtoEntity));
-        return mapper.toModel(produtoAntigo.get());
+        var produtoAtualizado = repository.save(produtoAntigo.get());
+        return mapper.toModel(produtoAtualizado);
     }
 }

@@ -54,6 +54,7 @@ public class ClientePersistenceAdapter implements ClienteOutputPort {
         if (clienteAntigo.isEmpty())
             throw new RuntimeException("Falha ao atualizar o Cliente");
         clienteAntigo.ifPresent(clienteEntity -> mapper.updateEntityFromModel(cliente, clienteEntity));
-        return mapper.toModel(clienteAntigo.get());
+        var clienteAtualizado = repository.save(clienteAntigo.get());
+        return mapper.toModel(clienteAtualizado);
     }
 }
