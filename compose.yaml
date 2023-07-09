@@ -1,10 +1,9 @@
 services:
 
   app:
+    image: 'marcusvcl/gff'
     depends_on:
       - mongodb
-    build:
-      dockerfile: Dockerfile
     ports:
       - 8080:8080
     expose:
