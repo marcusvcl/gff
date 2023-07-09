@@ -5,8 +5,9 @@ import br.com.fiap.gff.infrastructure.adapters.input.rest.data.request.CreatePro
 import br.com.fiap.gff.infrastructure.adapters.input.rest.data.request.UpdateProdutoRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ProdutoRestMapper {
     @Mapping(target = "categoria.codigo", source = "codigoCategoria")
     Produto toModel(CreateProdutoRequest request);

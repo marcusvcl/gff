@@ -55,8 +55,9 @@ public class ProdutoRestAdapter {
     @PutMapping(value = "/produtos/{id}")
     @Operation(summary = "Atualiza um produto a partir dos dados informados.")
     public ResponseEntity<Produto> atualizarProduto(@PathVariable String id, @RequestBody UpdateProdutoRequest request) {
-        var produto = produtoUseCase.atualizarProduto(mapper.toModel(request));
+        var produto = mapper.toModel(request);
         produto.setId(id);
+        produto = produtoUseCase.atualizarProduto(produto);
         return new ResponseEntity<>(produto, HttpStatus.OK);
     }
 

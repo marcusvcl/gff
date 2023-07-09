@@ -53,8 +53,11 @@ public class CategoriaRestAdapter {
         return new ResponseEntity<>(categoria, HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Categoria> atualizarCategoria(@RequestBody UpdateCategoriaRequest request) {
+    @Operation(summary = "Atualiza uma categoria a partir das informações abaixo.")
+    @PutMapping(value = "/categoria/{id}")
+    public ResponseEntity<Categoria> atualizarCategoria(@PathVariable String id, @RequestBody UpdateCategoriaRequest request) {
         var categoria = mapper.toModel(request);
+        categoria.setId(id);
         categoria = useCase.atualizarCategoria(categoria);
         return new ResponseEntity<>(categoria, HttpStatus.OK);
     }

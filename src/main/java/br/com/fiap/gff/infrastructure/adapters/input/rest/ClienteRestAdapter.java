@@ -47,8 +47,9 @@ public class ClienteRestAdapter {
     @PutMapping(value = "/clientes/{id}")
     @Operation(summary = "Atualiza as informações do cliente com base nos dados informados.")
     public ResponseEntity<Cliente> atualizarCliente(@PathVariable String id, @RequestBody UpdateClienteRequest request) {
-        var cliente = useCase.atualizarCliente(mapper.toModel(request));
+        var cliente = mapper.toModel(request);
         cliente.setId(id);
+        cliente = useCase.atualizarCliente(cliente);
         return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
 
