@@ -10,8 +10,3 @@ spec:
       image: mongo:4.2.8
       ports:
         - containerPort: 27017
-      env:
-        - name: MONGO_INITDB_ROOT_USERNAME
-          value: gff
-        - name: MONGO_INITDB_ROOT_PASSWORD
-          value: test

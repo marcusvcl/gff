@@ -4,7 +4,7 @@ metadata:
   name: gff-api-config
 spec:
   containers:
-  - name: api-configmap
+  - name: gff-api-config
     image: marcusvcl/gff
     ports:
     - containerPort: 3000
