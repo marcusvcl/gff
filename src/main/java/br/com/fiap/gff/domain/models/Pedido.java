@@ -52,7 +52,7 @@ public class Pedido {
             this.totalPedido = 0d;
             return;
         }
-        this.totalPedido = items.stream().map(ItemPedido::getPreco).reduce(0d, Double::sum);
+        this.totalPedido = items.stream().map(ItemPedido::getPreco).reduce(0d, (arg0, arg1) -> Double.sum(arg0, arg1));
     }
 
     public void atualizarStatus(String status) {

@@ -1,5 +1,9 @@
 package br.com.fiap.gff.domain.services;
 
+import java.util.Collection;
+
+import org.springframework.stereotype.Service;
+
 import br.com.fiap.gff.application.ports.input.PagamentoUseCase;
 import br.com.fiap.gff.application.ports.input.PedidoUseCase;
 import br.com.fiap.gff.application.ports.output.ClienteOutputPort;
@@ -9,13 +13,9 @@ import br.com.fiap.gff.domain.exceptions.RecursoNaoEncontradoException;
 import br.com.fiap.gff.domain.exceptions.RequisicaoInvalidaException;
 import br.com.fiap.gff.domain.models.Cliente;
 import br.com.fiap.gff.domain.models.Pedido;
-import br.com.fiap.gff.domain.models.Produto;
 import br.com.fiap.gff.domain.valueObjects.ClientePedido;
 import br.com.fiap.gff.domain.valueObjects.ItemPedido;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import java.util.Collection;
 
 @RequiredArgsConstructor
 @Service

@@ -1,8 +1,5 @@
 package br.com.fiap.gff.infrastructure.adapters.output.persistence.entities;
 
-
-import br.com.fiap.gff.domain.models.Categoria;
-import br.com.fiap.gff.domain.models.Produto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

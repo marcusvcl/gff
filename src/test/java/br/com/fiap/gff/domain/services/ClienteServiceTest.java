@@ -1,21 +1,21 @@
 package br.com.fiap.gff.domain.services;
 
-import br.com.fiap.gff.application.ports.output.ClienteOutputPort;
-import br.com.fiap.gff.domain.exceptions.RecursoNaoEncontradoException;
-import br.com.fiap.gff.domain.models.Cliente;
-import org.junit.jupiter.api.BeforeAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import br.com.fiap.gff.application.ports.output.ClienteOutputPort;
+import br.com.fiap.gff.domain.exceptions.RecursoNaoEncontradoException;
+import br.com.fiap.gff.domain.models.Cliente;
 
 @ExtendWith(MockitoExtension.class)
 class ClienteServiceTest {
@@ -27,8 +27,8 @@ class ClienteServiceTest {
 
     @Test
     void DeveObterTodosClientes() {
-        var c1 = new Cliente("id","nome", "apelido", "documento", "dataNascimento", "email", "telefone", "senha");
-        var c2 = new Cliente("id","nome", "apelido", "documento", "dataNascimento", "email", "telefone", "senha");
+        var c1 = new Cliente("id", "nome", "apelido", "documento", "dataNascimento", "email", "telefone", "senha");
+        var c2 = new Cliente("id", "nome", "apelido", "documento", "dataNascimento", "email", "telefone", "senha");
         var clientes = new ArrayList<Cliente>(Arrays.asList(c1, c2));
         when(outputPort.obterTodosClientes()).thenReturn(clientes);
         var result = service.obterTodosClientes();
@@ -44,7 +44,7 @@ class ClienteServiceTest {
 
     @Test
     void DeveRetornarUmClienteAoConsultarPorId() {
-        var c1 = new Cliente("id","nome", "apelido", "documento", "dataNascimento", "email", "telefone", "senha");
+        var c1 = new Cliente("id", "nome", "apelido", "documento", "dataNascimento", "email", "telefone", "senha");
         when(outputPort.obterClientePorId("id")).thenReturn(c1);
         var result = service.obterClientePorId("id");
         assertEquals("apelido", result.getApelido());
@@ -59,7 +59,7 @@ class ClienteServiceTest {
 
     @Test
     void DeveCriarUmCliente() {
-        var c1 = new Cliente("id","nome", "apelido", "documento", "dataNascimento", "email", "telefone", "senha");
+        var c1 = new Cliente("id", "nome", "apelido", "documento", "dataNascimento", "email", "telefone", "senha");
         when(outputPort.salvarCliente(c1)).thenReturn(c1);
         var result = service.criarCliente(c1);
         assertEquals(c1, result);
@@ -67,7 +67,7 @@ class ClienteServiceTest {
 
     @Test
     void DeveAtualizarUmCliente() {
-        var c1 = new Cliente("id","nome", "apelido", "documento", "dataNascimento", "email", "telefone", "senha");
+        var c1 = new Cliente("id", "nome", "apelido", "documento", "dataNascimento", "email", "telefone", "senha");
         when(outputPort.atualizarCliente(c1)).thenReturn(c1);
         var result = service.atualizarCliente(c1);
         assertEquals(c1, result);

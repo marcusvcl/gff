@@ -49,7 +49,7 @@ public class CategoriaPersistenceAdapter implements CategoriaOutputPort {
     public Categoria atualizarCategoria(Categoria categoria) {
         Optional<CategoriaEntity> categoriaAnterior = repository.findById(categoria.getId());
         if (categoriaAnterior.isEmpty())
-            return null; //TODO lançar exceção com falha na atualização do objeto
+            return null; 
         CategoriaEntity categoriaAtualizada = categoriaAnterior.get();
         mapper.updateEntityFromModel(categoria, categoriaAtualizada);
         repository.save(categoriaAtualizada);

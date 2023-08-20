@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PedidoTest {
@@ -93,6 +94,7 @@ class PedidoTest {
         var pedido = new Pedido();
         pedido.atualizarStatus("PRONTO");
         var novoStatus = pedido.getStatus().getStatus();
+        assertNotNull(novoStatus);
     }
 
     @Test
