@@ -1,7 +1,9 @@
 package br.com.fiap.gff.domain.models;
 
 import br.com.fiap.gff.domain.exceptions.RequisicaoInvalidaException;
-import br.com.fiap.gff.domain.valueObjects.ItemPedido;
+import br.com.fiap.gff.domain.model.entities.Pedido;
+import br.com.fiap.gff.domain.model.valueobjects.ItemPedido;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

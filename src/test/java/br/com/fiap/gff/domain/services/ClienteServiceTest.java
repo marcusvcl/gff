@@ -13,15 +13,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import br.com.fiap.gff.application.ports.output.ClienteOutputPort;
 import br.com.fiap.gff.domain.exceptions.RecursoNaoEncontradoException;
-import br.com.fiap.gff.domain.models.Cliente;
+import br.com.fiap.gff.domain.gateway.ClienteGateway;
+import br.com.fiap.gff.domain.model.entities.Cliente;
+import br.com.fiap.gff.domain.service.ClienteService;
 
 @ExtendWith(MockitoExtension.class)
 class ClienteServiceTest {
 
     @Mock
-    ClienteOutputPort outputPort;
+    ClienteGateway outputPort;
     @InjectMocks
     ClienteService service;
 
