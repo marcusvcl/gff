@@ -7,6 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import br.com.fiap.gff.domain.model.entities.Categoria;
+import br.com.fiap.gff.domain.usecase.CategoriaUseCase;
+import br.com.fiap.gff.infrastructure.web.dto.request.CreateCategoriaRequest;
+import br.com.fiap.gff.infrastructure.web.dto.request.UpdateCategoriaRequest;
+import br.com.fiap.gff.infrastructure.web.mapper.CategoriaRestMapper;
+
 import java.util.Collection;
 
 @RestController

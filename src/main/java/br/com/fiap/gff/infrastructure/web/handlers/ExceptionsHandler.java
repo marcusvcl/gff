@@ -1,9 +1,9 @@
-package br.com.fiap.gff.infrastructure.adapters.input.rest.handlers;
+package br.com.fiap.gff.infrastructure.web.handlers;
 
 import br.com.fiap.gff.domain.exceptions.RecursoJaExisteException;
 import br.com.fiap.gff.domain.exceptions.RecursoNaoEncontradoException;
 import br.com.fiap.gff.domain.exceptions.RequisicaoInvalidaException;
-import br.com.fiap.gff.infrastructure.adapters.input.rest.data.response.MensagemErroResponse;
+import br.com.fiap.gff.infrastructure.web.dto.response.MensagemErroResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

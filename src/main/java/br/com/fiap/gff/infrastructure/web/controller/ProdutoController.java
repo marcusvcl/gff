@@ -1,16 +1,17 @@
 package br.com.fiap.gff.infrastructure.web.controller;
 
-import br.com.fiap.gff.application.ports.input.ProdutoUseCase;
-import br.com.fiap.gff.domain.models.Produto;
-import br.com.fiap.gff.infrastructure.adapters.input.rest.data.request.CreateProdutoRequest;
-import br.com.fiap.gff.infrastructure.adapters.input.rest.data.request.UpdateProdutoRequest;
-import br.com.fiap.gff.infrastructure.adapters.input.rest.mapper.ProdutoRestMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import br.com.fiap.gff.domain.model.entities.Produto;
+import br.com.fiap.gff.domain.usecase.ProdutoUseCase;
+import br.com.fiap.gff.infrastructure.web.dto.request.CreateProdutoRequest;
+import br.com.fiap.gff.infrastructure.web.dto.request.UpdateProdutoRequest;
+import br.com.fiap.gff.infrastructure.web.mapper.ProdutoRestMapper;
 
 import java.util.Collection;
 

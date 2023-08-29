@@ -1,16 +1,17 @@
 package br.com.fiap.gff.infrastructure.web.controller;
 
-import br.com.fiap.gff.application.ports.input.PedidoUseCase;
-import br.com.fiap.gff.domain.models.Pedido;
-import br.com.fiap.gff.infrastructure.adapters.input.rest.data.request.CreatePedidoRequest;
-import br.com.fiap.gff.infrastructure.adapters.input.rest.data.request.UpdatePedidoRequest;
-import br.com.fiap.gff.infrastructure.adapters.input.rest.mapper.PedidoRestMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import br.com.fiap.gff.domain.model.entities.Pedido;
+import br.com.fiap.gff.domain.usecase.PedidoUseCase;
+import br.com.fiap.gff.infrastructure.web.dto.request.CreatePedidoRequest;
+import br.com.fiap.gff.infrastructure.web.dto.request.UpdatePedidoRequest;
+import br.com.fiap.gff.infrastructure.web.mapper.PedidoRestMapper;
 
 import java.util.Collection;
 

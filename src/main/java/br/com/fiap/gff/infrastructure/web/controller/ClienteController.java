@@ -1,16 +1,17 @@
 package br.com.fiap.gff.infrastructure.web.controller;
 
-import br.com.fiap.gff.application.ports.input.ClienteUseCase;
-import br.com.fiap.gff.domain.models.Cliente;
-import br.com.fiap.gff.infrastructure.adapters.input.rest.data.request.CreateClienteRequest;
-import br.com.fiap.gff.infrastructure.adapters.input.rest.data.request.UpdateClienteRequest;
-import br.com.fiap.gff.infrastructure.adapters.input.rest.mapper.ClienteRestMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import br.com.fiap.gff.domain.model.entities.Cliente;
+import br.com.fiap.gff.domain.usecase.ClienteUseCase;
+import br.com.fiap.gff.infrastructure.web.dto.request.CreateClienteRequest;
+import br.com.fiap.gff.infrastructure.web.dto.request.UpdateClienteRequest;
+import br.com.fiap.gff.infrastructure.web.mapper.ClienteRestMapper;
 
 import java.util.Collection;
 
