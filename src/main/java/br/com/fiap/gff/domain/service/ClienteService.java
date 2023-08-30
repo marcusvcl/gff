@@ -1,19 +1,22 @@
 package br.com.fiap.gff.domain.service;
 
+import java.util.Collection;
+
+import org.springframework.stereotype.Service;
+
 import br.com.fiap.gff.domain.exceptions.RecursoNaoEncontradoException;
 import br.com.fiap.gff.domain.gateway.ClienteGateway;
 import br.com.fiap.gff.domain.model.entities.Cliente;
 import br.com.fiap.gff.domain.usecase.ClienteUseCase;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-
-@RequiredArgsConstructor
 @Service
 public class ClienteService implements ClienteUseCase {
 
     private final ClienteGateway clienteGateway;
+
+    public ClienteService(ClienteGateway clienteGateway) {
+        this.clienteGateway = clienteGateway;
+    }
 
     @Override
     public Collection<Cliente> obterTodosClientes() {

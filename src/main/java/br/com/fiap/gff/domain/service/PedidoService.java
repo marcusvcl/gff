@@ -6,29 +6,35 @@ import org.springframework.stereotype.Service;
 
 import br.com.fiap.gff.domain.exceptions.RecursoNaoEncontradoException;
 import br.com.fiap.gff.domain.exceptions.RequisicaoInvalidaException;
-import br.com.fiap.gff.domain.gateway.ClienteGateway;
 import br.com.fiap.gff.domain.gateway.PedidoGateway;
-import br.com.fiap.gff.domain.gateway.ProdutoGateway;
 import br.com.fiap.gff.domain.model.entities.Cliente;
 import br.com.fiap.gff.domain.model.entities.Pedido;
 import br.com.fiap.gff.domain.model.valueobjects.ClientePedido;
 import br.com.fiap.gff.domain.model.valueobjects.ItemPedido;
+import br.com.fiap.gff.domain.usecase.ClienteUseCase;
 import br.com.fiap.gff.domain.usecase.PagamentoUseCase;
 import br.com.fiap.gff.domain.usecase.PedidoUseCase;
-import lombok.RequiredArgsConstructor;
+import br.com.fiap.gff.domain.usecase.ProdutoUseCase;
 
-@RequiredArgsConstructor
 @Service
 public class PedidoService implements PedidoUseCase {
 
-    private final PedidoGateway pedidoGateway;
-    private final ProdutoGateway produtoGateway;
-    private final ClienteGateway clienteGateway;
+    private final PedidoGateway gateway;
+    private final ProdutoUseCase produtoUseCase;
+    private final ClienteUseCase clienteUseCase;
     private final PagamentoUseCase pagamentoUseCase;
+
+    public PedidoService(PedidoGateway gateway, ProdutoUseCase produtoUseCase, ClienteUseCase clienteUseCase,
+            PagamentoUseCase pagamentoUseCase) {
+        this.gateway = gateway;
+        this.produtoUseCase = produtoUseCase;
+        this.clienteUseCase = clienteUseCase;
+        this.pagamentoUseCase = pagamentoUseCase;
+    }
 
     @Override
     public Collection<Pedido> obterTodosPedidos() {
-        Collection<Pedido> pedidos = pedidoGateway.obterTodosPedidos();
+        Collection<Pedido> pedidos = gateway.obterTodosPedidos();
         if (pedidos.isEmpty())
             throw new RecursoNaoEncontradoException("Nenhum pedido cadastrado no sistema.");
         return pedidos;
@@ -36,7 +42,7 @@ public class PedidoService implements PedidoUseCase {
 
     @Override
     public Pedido obterPedidoPorId(String id) {
-        Pedido pedido = pedidoGateway.obterPedidoPorId(id);
+        Pedido pedido = gateway.obterPedidoPorId(id);
         if (pedido == null)
             throw new RecursoNaoEncontradoException("Nenhum pedido encontrado com o id " + id + ".");
         return pedido;
@@ -47,23 +53,23 @@ public class PedidoService implements PedidoUseCase {
         validarClienteDoPedido(pedido.getCliente());
         validarProdutosDoPedido(pedido.getItems());
         pedido.calcularTotalPedido();
-        return pedidoGateway.salvarPedido(pedido);
+        return gateway.salvarPedido(pedido);
     }
 
     @Override
     public Pedido atualizarPedido(Pedido pedido) {
-        var pedidoAnterior =  obterPedidoPorId(pedido.getId());
+        var pedidoAnterior = obterPedidoPorId(pedido.getId());
         validarProdutosDoPedido(pedido.getItems());
         pedidoAnterior.adicionarItem(pedido.getItems());
         pedidoAnterior.calcularTotalPedido();
-        return pedidoGateway.atualizarPedido(pedidoAnterior);
+        return gateway.atualizarPedido(pedidoAnterior);
     }
 
     @Override
     public Pedido atualizarStatusPedido(String id, String status) {
         var pedidoAnterior = obterPedidoPorId(id);
         pedidoAnterior.atualizarStatus(status);
-        return pedidoGateway.atualizarPedido(pedidoAnterior);
+        return gateway.atualizarPedido(pedidoAnterior);
     }
 
     @Override
@@ -71,30 +77,31 @@ public class PedidoService implements PedidoUseCase {
         var pedidoAnterior = obterPedidoPorId(pedidoId);
         pedidoAnterior.removerItem(produtoId);
         pedidoAnterior.calcularTotalPedido();
-        return pedidoGateway.atualizarPedido(pedidoAnterior);
+        return gateway.atualizarPedido(pedidoAnterior);
     }
 
     @Override
     public Pedido realizarCheckout(String id) {
         var pedido = obterPedidoPorId(id);
         pedido = pagamentoUseCase.executarPagamento(pedido);
-        return pedidoGateway.atualizarPedido(pedido);
+        return gateway.atualizarPedido(pedido);
     }
 
     @Override
     public void deletarPedidoPorId(String id) {
-        pedidoGateway.deletarPedidoPorId(id);
+        gateway.deletarPedidoPorId(id);
     }
 
     private void validarProdutosDoPedido(Collection<ItemPedido> items) {
         if (items == null)
             return;
         for (ItemPedido item : items) {
-            var produto = produtoGateway.obterProdutoPorId(item.getProdutoId());
+            var produto = produtoUseCase.obterProdutoPorId(item.getProdutoId());
             if (produto == null)
                 throw new RequisicaoInvalidaException("Pedido com produto inválido. Por favor repita a operação.");
             if (produto.getEstoque() < item.getQuantidade())
-                throw new RequisicaoInvalidaException("Erro ao atualizar o pedido. Item sem estoque. Por favor repita a operação.");
+                throw new RequisicaoInvalidaException(
+                        "Erro ao atualizar o pedido. Item sem estoque. Por favor repita a operação.");
             item.setPreco(produto.getPreco());
             item.setNome(produto.getNome());
         }
@@ -113,7 +120,7 @@ public class PedidoService implements PedidoUseCase {
     }
 
     private Cliente recuperarInformacaoCliente(String id) {
-        var cliente = clienteGateway.obterClientePorId(id);
+        var cliente = clienteUseCase.obterClientePorId(id);
         if (cliente == null)
             throw new RecursoNaoEncontradoException("Cliente não encontrado na base.");
         return cliente;

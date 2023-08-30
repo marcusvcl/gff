@@ -1,20 +1,24 @@
 package br.com.fiap.gff.domain.service;
 
+import java.util.Collection;
+
+import org.springframework.stereotype.Service;
+
 import br.com.fiap.gff.domain.exceptions.RecursoNaoEncontradoException;
 import br.com.fiap.gff.domain.exceptions.RequisicaoInvalidaException;
 import br.com.fiap.gff.domain.gateway.CategoriaGateway;
 import br.com.fiap.gff.domain.model.entities.Categoria;
 import br.com.fiap.gff.domain.usecase.CategoriaUseCase;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import java.util.Collection;
 
 @Service
-@RequiredArgsConstructor
 public class CategoriaService implements CategoriaUseCase {
 
     private final CategoriaGateway categoriaGateway;
+
+    public CategoriaService(CategoriaGateway categoriaGateway) {
+        this.categoriaGateway = categoriaGateway;
+    }
+
     @Override
     public Collection<Categoria> obterTodasCategorias() {
         var categorias = categoriaGateway.obterTodasCategorias();
@@ -35,7 +39,8 @@ public class CategoriaService implements CategoriaUseCase {
     public Categoria obterCategoriaPorCodigo(Integer codigo) {
         var categoria = categoriaGateway.obterCategoriaPorCodigo(codigo);
         if (categoria == null)
-            throw new RecursoNaoEncontradoException("Não foi encontrado nenhuma categoria para o codigo " + codigo.toString());
+            throw new RecursoNaoEncontradoException(
+                    "Não foi encontrado nenhuma categoria para o codigo " + codigo.toString());
         return categoria;
     }
 
@@ -47,7 +52,7 @@ public class CategoriaService implements CategoriaUseCase {
         if (existeCategoria)
             throw new RequisicaoInvalidaException("Já existe uma categoria com esse código");
         Integer ultimoCodigo = categoriaGateway.obterUltimoCodigo();
-        categoria.setCodigo(ultimoCodigo+1);
+        categoria.setCodigo(ultimoCodigo + 1);
         return categoriaGateway.salvarCategoria(categoria);
     }
 

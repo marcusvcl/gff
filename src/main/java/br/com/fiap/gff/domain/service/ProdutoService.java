@@ -6,22 +6,25 @@ import org.springframework.stereotype.Service;
 
 import br.com.fiap.gff.domain.exceptions.RecursoNaoEncontradoException;
 import br.com.fiap.gff.domain.exceptions.RequisicaoInvalidaException;
-import br.com.fiap.gff.domain.gateway.CategoriaGateway;
 import br.com.fiap.gff.domain.gateway.ProdutoGateway;
 import br.com.fiap.gff.domain.model.entities.Produto;
+import br.com.fiap.gff.domain.usecase.CategoriaUseCase;
 import br.com.fiap.gff.domain.usecase.ProdutoUseCase;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Service
 public class ProdutoService implements ProdutoUseCase {
 
-    private final ProdutoGateway produtoGateway;
-    private final CategoriaGateway categoriaGateway;
+    private final ProdutoGateway gateway;
+    private final CategoriaUseCase categoriaUseCase;
+
+    public ProdutoService(ProdutoGateway gateway, CategoriaUseCase categoriaUseCase) {
+        this.gateway = gateway;
+        this.categoriaUseCase = categoriaUseCase;
+    }
 
     @Override
     public Collection<Produto> obterTodosProdutos() {
-        var produtos = produtoGateway.obterTodosProdutos();
+        var produtos = gateway.obterTodosProdutos();
         if (produtos.isEmpty())
             throw new RecursoNaoEncontradoException("Não foram encontrados produtos cadatrados no sistema.");
         return produtos;
@@ -29,7 +32,7 @@ public class ProdutoService implements ProdutoUseCase {
 
     @Override
     public Produto obterProdutoPorId(String id) {
-        var produto = produtoGateway.obterProdutoPorId(id);
+        var produto = gateway.obterProdutoPorId(id);
         if (produto == null)
             throw new RecursoNaoEncontradoException("Não foi encontrado nenhum produto para o id " + id + ".");
         return produto;
@@ -37,30 +40,32 @@ public class ProdutoService implements ProdutoUseCase {
 
     @Override
     public Collection<Produto> obterProdutoPorCategoria(Integer codigoCategoria) {
-        var produtos = produtoGateway.obterProdutoPorCategoria(codigoCategoria);
+        var produtos = gateway.obterProdutoPorCategoria(codigoCategoria);
         if (produtos.isEmpty())
-            throw new RecursoNaoEncontradoException("Não foram encontrados nenhum produto para a categoria " + codigoCategoria + " informada.");
+            throw new RecursoNaoEncontradoException(
+                    "Não foram encontrados nenhum produto para a categoria " + codigoCategoria + " informada.");
         return produtos;
     }
 
     @Override
     public Produto criarProduto(Produto produto) {
-        // Recupera a categoria pelo código informado, se existir a categoria será vinculada ao produto
+        // Recupera a categoria pelo código informado, se existir a categoria será
+        // vinculada ao produto
         // se não, será lançado uma execeção de negócio.
-        var categoria = categoriaGateway.obterCategoriaPorCodigo(produto.getCategoria().getCodigo());
+        var categoria = categoriaUseCase.obterCategoriaPorCodigo(produto.getCategoria().getCodigo());
         if (categoria == null)
             throw new RequisicaoInvalidaException("Não existe a categoria informada no produto!");
         produto.setCategoria(categoria);
-        return produtoGateway.salvarProduto(produto);
+        return gateway.salvarProduto(produto);
     }
 
     @Override
     public Produto atualizarProduto(Produto produto) {
-        return produtoGateway.atualizarProduto(produto);
+        return gateway.atualizarProduto(produto);
     }
 
     @Override
     public void deletarProdutoPorId(String id) {
-        produtoGateway.deletarProdutoPorId(id);
+        gateway.deletarProdutoPorId(id);
     }
 }

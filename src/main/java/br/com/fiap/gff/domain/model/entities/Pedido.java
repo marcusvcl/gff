@@ -1,23 +1,17 @@
 package br.com.fiap.gff.domain.model.entities;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Objects;
+
 import br.com.fiap.gff.domain.enums.StatusPedidoEnum;
 import br.com.fiap.gff.domain.exceptions.RequisicaoInvalidaException;
 import br.com.fiap.gff.domain.model.valueobjects.ClientePedido;
 import br.com.fiap.gff.domain.model.valueobjects.ItemPedido;
 import br.com.fiap.gff.domain.model.valueobjects.PagamentoPedido;
 import br.com.fiap.gff.domain.model.valueobjects.StatusPedido;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Pedido {
     private String id;
     private ClientePedido cliente;
@@ -26,6 +20,76 @@ public class Pedido {
     private PagamentoPedido pagamento;
     private Double totalPedido;
     private LocalDateTime dataPedido;
+
+    public Pedido() {
+    }
+
+    public Pedido(String id, ClientePedido cliente, Collection<ItemPedido> items, StatusPedido status,
+            PagamentoPedido pagamento, Double totalPedido, LocalDateTime dataPedido) {
+        this.id = id;
+        this.cliente = cliente;
+        this.items = items;
+        this.status = status;
+        this.pagamento = pagamento;
+        this.totalPedido = totalPedido;
+        this.dataPedido = dataPedido;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public ClientePedido getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClientePedido cliente) {
+        this.cliente = cliente;
+    }
+
+    public Collection<ItemPedido> getItems() {
+        return items;
+    }
+
+    public void setItems(Collection<ItemPedido> items) {
+        this.items = items;
+    }
+
+    public StatusPedido getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusPedido status) {
+        this.status = status;
+    }
+
+    public PagamentoPedido getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(PagamentoPedido pagamento) {
+        this.pagamento = pagamento;
+    }
+
+    public Double getTotalPedido() {
+        return totalPedido;
+    }
+
+    public void setTotalPedido(Double totalPedido) {
+        this.totalPedido = totalPedido;
+    }
+
+    public LocalDateTime getDataPedido() {
+        return dataPedido;
+    }
+
+    public void setDataPedido(LocalDateTime dataPedido) {
+        this.dataPedido = dataPedido;
+    }
 
     public void adicionarItem(ItemPedido item) {
         if (this.items == null)
