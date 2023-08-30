@@ -1,4 +1,4 @@
-package br.com.fiap.gff.infrastructure.web.controller;
+package br.com.fiap.gff.application.web.controller;
 
 import java.util.Collection;
 
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fiap.gff.application.web.dto.request.CreateProdutoRequest;
+import br.com.fiap.gff.application.web.dto.request.UpdateProdutoRequest;
+import br.com.fiap.gff.application.web.mapper.ProdutoRestMapper;
 import br.com.fiap.gff.domain.model.entities.Produto;
 import br.com.fiap.gff.domain.usecase.ProdutoUseCase;
-import br.com.fiap.gff.infrastructure.web.dto.request.CreateProdutoRequest;
-import br.com.fiap.gff.infrastructure.web.dto.request.UpdateProdutoRequest;
-import br.com.fiap.gff.infrastructure.web.mapper.ProdutoRestMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

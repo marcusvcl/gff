@@ -1,4 +1,4 @@
-package br.com.fiap.gff.infrastructure.web.dto.request;
+package br.com.fiap.gff.application.web.dto.request;
 
 import java.io.Serializable;
 
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateProdutoRequest implements Serializable {
+public class CreateProdutoRequest implements Serializable {
+    private String nome;
     private String descricao;
     private Double preco;
     private Integer estoque;

@@ -1,12 +1,12 @@
-package br.com.fiap.gff.infrastructure.web.mapper;
+package br.com.fiap.gff.application.web.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
+import br.com.fiap.gff.application.web.dto.request.CreatePedidoRequest;
+import br.com.fiap.gff.application.web.dto.request.UpdatePedidoRequest;
 import br.com.fiap.gff.domain.model.entities.Pedido;
-import br.com.fiap.gff.infrastructure.web.dto.request.CreatePedidoRequest;
-import br.com.fiap.gff.infrastructure.web.dto.request.UpdatePedidoRequest;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PedidoRestMapper {

@@ -1,4 +1,4 @@
-package br.com.fiap.gff.infrastructure.web.dto.request;
+package br.com.fiap.gff.application.web.dto.request;
 
 import java.io.Serializable;
 
@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateCategoriaRequest implements Serializable {
+public class CreateCategoriaRequest implements Serializable {
     private String descricao;
 }
