@@ -1,6 +1,9 @@
 package br.com.fiap.gff.infrastructure.persistence;
 
-import lombok.RequiredArgsConstructor;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import br.com.fiap.gff.domain.gateway.CategoriaGateway;
@@ -8,10 +11,7 @@ import br.com.fiap.gff.domain.model.entities.Categoria;
 import br.com.fiap.gff.infrastructure.persistence.entities.CategoriaEntity;
 import br.com.fiap.gff.infrastructure.persistence.mappers.CategoriaPersistenceMapper;
 import br.com.fiap.gff.infrastructure.persistence.repositories.CategoriaRepository;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -50,7 +50,7 @@ public class CategoriaGatewayImpl implements CategoriaGateway {
     public Categoria atualizarCategoria(Categoria categoria) {
         Optional<CategoriaEntity> categoriaAnterior = repository.findById(categoria.getId());
         if (categoriaAnterior.isEmpty())
-            return null; 
+            return null;
         CategoriaEntity categoriaAtualizada = categoriaAnterior.get();
         mapper.updateEntityFromModel(categoria, categoriaAtualizada);
         repository.save(categoriaAtualizada);

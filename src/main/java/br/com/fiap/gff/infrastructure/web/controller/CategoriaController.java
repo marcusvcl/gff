@@ -1,19 +1,26 @@
 package br.com.fiap.gff.infrastructure.web.controller;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
+import java.util.Collection;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.gff.domain.model.entities.Categoria;
 import br.com.fiap.gff.domain.usecase.CategoriaUseCase;
 import br.com.fiap.gff.infrastructure.web.dto.request.CreateCategoriaRequest;
 import br.com.fiap.gff.infrastructure.web.dto.request.UpdateCategoriaRequest;
 import br.com.fiap.gff.infrastructure.web.mapper.CategoriaRestMapper;
-
-import java.util.Collection;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/v1")
@@ -38,7 +45,6 @@ public class CategoriaController {
         return new ResponseEntity<>(categoria, HttpStatus.OK);
     }
 
-
     @Operation(summary = "Retorna uma cateogoria do banco de dados pelo id informado.")
     @GetMapping(value = "/categoria/id/{id}")
     public ResponseEntity<Categoria> obterCategoriaPeloId(@PathVariable String id) {
@@ -56,7 +62,8 @@ public class CategoriaController {
 
     @Operation(summary = "Atualiza uma categoria a partir das informações abaixo.")
     @PutMapping(value = "/categoria/{id}")
-    public ResponseEntity<Categoria> atualizarCategoria(@PathVariable String id, @RequestBody UpdateCategoriaRequest request) {
+    public ResponseEntity<Categoria> atualizarCategoria(@PathVariable String id,
+            @RequestBody UpdateCategoriaRequest request) {
         var categoria = mapper.toModel(request);
         categoria.setId(id);
         categoria = useCase.atualizarCategoria(categoria);

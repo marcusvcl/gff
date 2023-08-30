@@ -11,7 +11,9 @@ import br.com.fiap.gff.infrastructure.persistence.entities.CategoriaEntity;
 @Mapper(componentModel = "spring")
 public interface CategoriaPersistenceMapper {
     Categoria toModel(CategoriaEntity entity);
+
     CategoriaEntity toEntity(Categoria model);
+
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromModel(Categoria model, @MappingTarget CategoriaEntity entity);
 }

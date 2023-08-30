@@ -10,5 +10,6 @@ import br.com.fiap.gff.infrastructure.web.dto.request.UpdateClienteRequest;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ClienteRestMapper {
     Cliente toModel(CreateClienteRequest request);
+
     Cliente toModel(UpdateClienteRequest request);
 }

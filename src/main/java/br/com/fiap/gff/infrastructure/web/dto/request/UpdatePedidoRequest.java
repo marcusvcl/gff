@@ -1,11 +1,11 @@
 package br.com.fiap.gff.infrastructure.web.dto.request;
 
+import java.io.Serializable;
+import java.util.Collection;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
-import java.util.Collection;
 
 @Data
 @AllArgsConstructor

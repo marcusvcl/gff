@@ -11,7 +11,9 @@ import br.com.fiap.gff.infrastructure.persistence.entities.ProdutoEntity;
 @Mapper(componentModel = "spring")
 public interface ProdutoPersistenceMapper {
     Produto toModel(ProdutoEntity entity);
+
     ProdutoEntity toEntity(Produto model);
+
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromModel(Produto model, @MappingTarget ProdutoEntity entity);
 }

@@ -51,8 +51,9 @@ public class ProdutoPersistenceAdapter implements ProdutoGateway {
     @Override
     public Collection<Produto> obterProdutoPorCategoria(Integer codigoCategoria) {
         Optional<Collection<ProdutoEntity>> produtos = repository.findByCategoriaCodigo(codigoCategoria);
-        return produtos.<Collection<Produto>>map(produtoEntities ->
-                produtoEntities.stream().map(mapper::toModel).toList()).orElse(null);
+        return produtos
+                .<Collection<Produto>>map(produtoEntities -> produtoEntities.stream().map(mapper::toModel).toList())
+                .orElse(null);
     }
 
     @Override

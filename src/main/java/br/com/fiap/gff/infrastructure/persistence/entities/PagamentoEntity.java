@@ -1,12 +1,13 @@
 package br.com.fiap.gff.infrastructure.persistence.entities;
 
+import java.io.Serializable;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import br.com.fiap.gff.domain.enums.TipoDePagamentoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.io.Serializable;
 
 @Data
 @AllArgsConstructor

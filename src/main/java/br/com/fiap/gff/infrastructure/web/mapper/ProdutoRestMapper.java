@@ -12,6 +12,7 @@ import br.com.fiap.gff.infrastructure.web.dto.request.UpdateProdutoRequest;
 public interface ProdutoRestMapper {
     @Mapping(target = "categoria.codigo", source = "codigoCategoria")
     Produto toModel(CreateProdutoRequest request);
+
     @Mapping(target = "categoria.codigo", source = "codigoCategoria")
     Produto toModel(UpdateProdutoRequest request);
 }

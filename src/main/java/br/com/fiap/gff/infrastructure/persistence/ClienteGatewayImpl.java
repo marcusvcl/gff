@@ -22,7 +22,7 @@ public class ClienteGatewayImpl implements ClienteGateway {
 
     @Override
     public Cliente salvarCliente(Cliente cliente) {
-        ClienteEntity entity =  mapper.toEntity(cliente);
+        ClienteEntity entity = mapper.toEntity(cliente);
         return mapper.toModel(repository.save(entity));
     }
 

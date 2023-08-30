@@ -10,5 +10,6 @@ import br.com.fiap.gff.infrastructure.web.dto.request.UpdateCategoriaRequest;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CategoriaRestMapper {
     Categoria toModel(CreateCategoriaRequest request);
+
     Categoria toModel(UpdateCategoriaRequest request);
 }
