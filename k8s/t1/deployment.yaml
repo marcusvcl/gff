@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: pod-gff-api
-          image: "ritchellydomingos/gff:latest:latest"
+          image: "ritchellydomingos/gff:latest"
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: prod
