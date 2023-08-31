@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: pod-gff-api
+  labels:
+    app: pod-gff-api
+spec:
+  selector:
+    matchLabels:
+      app: pod-gff-api
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: "pod-gff-api"
+    spec:
+      containers:
+        - name: pod-gff-api
+          image: "ritchellydomingos/gff:latest"

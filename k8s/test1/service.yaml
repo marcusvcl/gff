@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gff-service
+spec:
+  selector:
+    app: pod-gff-api
+  type: ClusterIP
+  ports:
+  - name: gff-service
+    port: 80
+    targetPort: 80
+    protocol: TCP
