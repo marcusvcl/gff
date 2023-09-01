@@ -5,6 +5,7 @@ metadata:
   labels:
     app: pod-gff-mongo-db
 spec:
+  hostname: pod-gff-mongo-db
   containers:
     - name: mongodb
       image: mongo:4.2.8

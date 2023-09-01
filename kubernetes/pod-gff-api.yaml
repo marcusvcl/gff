@@ -2,10 +2,12 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: pod-gff-api
+  labels:
+    app: pod-gff-api
 spec:
   containers:
   - name: gff-api-config
-    image: marcusvcl/gff
+    image: ritchellydomingos/gff:ipVersion
     env:
       - name: SPRING_PROFILES_ACTIVE
         value: prod
