@@ -4,7 +4,7 @@ metadata:
   name: pod-gff-api
 spec:
   containers:
-  - name: gff-api-config
+  - name: pod-gff-api
     image: ritchellydomingos/gff:latest
     env:
       - name: SPRING_PROFILES_ACTIVE
