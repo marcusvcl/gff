@@ -16,4 +16,4 @@ spec:
     spec:
       containers:
         - name: pod-gff-api
-          image: "ritchellydomingos/gff:latest"
+          image: marcusvcl/gff:latest
