@@ -39,3 +39,4 @@ Para acessar o Swagger da aplicação acesse em um browser de sua preferência o
 [http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
 
 No swagger você encontrará as rotas de utilização que a API proporciona.
+
