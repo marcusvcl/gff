@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-gff-mongo-db
+  labels:
+    app: pod-gff-mongo-db
+spec:
+  selector:
+    matchLabels:
+      app: pod-gff-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: "pod-gff-api"
+    spec:
+      containers:
+        - name: pod-gff-api
+          image: "ritchellydomingos/gff:service"
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod
+            - name: MONGODB_HOST
+              value: svc-gff-mongo-db # Nome do serviço do MongoDB
+            - name: MONGODB_PORT
+              value: "32000"
+          ports:
+          - containerPort: 8080
