@@ -1,15 +1,17 @@
 package br.com.fiap.gff.domain.models;
 
-import br.com.fiap.gff.domain.exceptions.RequisicaoInvalidaException;
-import br.com.fiap.gff.domain.valueObjects.ItemPedido;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
+
+import br.com.fiap.gff.domain.exceptions.RequisicaoInvalidaException;
+import br.com.fiap.gff.domain.model.entities.Pedido;
+import br.com.fiap.gff.domain.model.valueobjects.ItemPedido;
 
 class PedidoTest {
 
