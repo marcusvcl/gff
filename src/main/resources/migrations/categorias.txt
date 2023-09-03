@@ -1,0 +1,2 @@
+{"_id":{"$oid":"64f3771a18dc9845ec3418d6"},"codigo":1,"descricao":"Bebidas","_class":"br.com.fiap.gff.infrastructure.persistence.entities.CategoriaEntity"}
+{"_id":{"$oid":"64f3775018dc9845ec3418d9"},"codigo":2,"descricao":"Sanduiches","_class":"br.com.fiap.gff.infrastructure.persistence.entities.CategoriaEntity"}
