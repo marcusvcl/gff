@@ -1,12 +1,14 @@
 package br.com.fiap.gff.application.web.config;
 
-import java.io.File;
-import java.nio.file.Files;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.bson.Document;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
@@ -32,13 +34,13 @@ public class MongoMigration {
             Collection<Cliente> clientes = clienteGateway.obterTodosClientes();
             if (clientes.size() != 0)
                 return;
-            MigrateCollection("src/main/resources/migrations/categorias.txt",
+            MigrateCollection("migrations/categorias.txt",
                     "categorias");
-            MigrateCollection("src/main/resources/migrations/clientes.txt",
+            MigrateCollection("migrations/clientes.txt",
                     "clientes");
-            MigrateCollection("src/main/resources/migrations/produtos.txt",
+            MigrateCollection("migrations/produtos.txt",
                     "produtos");
-            MigrateCollection("src/main/resources/migrations/pedidos.txt",
+            MigrateCollection("migrations/pedidos.txt",
                     "pedidos");
         } catch (Exception e) {
             log.warn("The migration has failed.");
@@ -48,9 +50,9 @@ public class MongoMigration {
 
     private void MigrateCollection(String path, String collection) throws Exception {
         log.info("Migrating collection >> " + collection);
-        File clientes = new File(path);
-        List<String> linhasCliente = lines(clientes);
-        String result = importTo(collection, linhasCliente);
+        InputStream file = new ClassPathResource(path).getInputStream();
+        List<String> fileLines = lines(file);
+        String result = importTo(collection, fileLines);
         log.info("Imported " + result + " lines into " + collection);
     }
 
@@ -80,8 +82,10 @@ public class MongoMigration {
         return inserts + "/" + jsonLines.size();
     }
 
-    private static List<String> lines(File file) throws Exception {
-        return Files.readAllLines(file.toPath());
+    private static List<String> lines(InputStream file) throws Exception {
+        List<String> fileLines = new ArrayList<>();
+        new BufferedReader(new InputStreamReader(file)).lines().forEach(fileLines::add);
+        return fileLines;
     }
 
 }
