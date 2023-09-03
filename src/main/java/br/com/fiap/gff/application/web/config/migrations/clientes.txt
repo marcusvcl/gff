@@ -1,0 +1,1 @@
+{"_id":{"$oid":"64f376c618dc9845ec3418d5"},"nome":"Marcus Lima","apelido":"Marcus","documento":"12345678901","dataNascimento":"21/09/1987","email":"marcusvcl@gmail.com","telefone":"79999999999","senha":"abc123","_class":"br.com.fiap.gff.infrastructure.persistence.entities.ClienteEntity"}
