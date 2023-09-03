@@ -1,6 +1,8 @@
 package br.com.fiap.gff.domain.gateway;
 
 import java.util.Collection;
+
+import br.com.fiap.gff.domain.enums.StatusPagamentoEnum;
 import br.com.fiap.gff.domain.model.entities.Pedido;
 
 public interface PedidoGateway {
@@ -14,6 +16,8 @@ public interface PedidoGateway {
     Pedido obterPedidoPorId(String id);
 
     Collection<Pedido> obterTodosPedidos();
+
+    StatusPagamentoEnum obterStatusDoPagamento(String id);
 
     Pedido atualizarPedido(Pedido pedido);
 
