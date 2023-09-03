@@ -42,7 +42,7 @@ public class MongoMigration {
                     "pedidos");
         } catch (Exception e) {
             log.warn("The migration has failed.");
-            log.warn(e.getMessage());
+            e.getStackTrace();
         }
     }
 
