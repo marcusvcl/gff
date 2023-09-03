@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: gff
+  labels: 
+    app: gff
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: gff
+  template:
+    metadata:
+      labels:
+        app: gff
+    spec: 
+      containers:
+      - name: gff
+        image: marcusvcl/gff
+        ports:
+        - containerPort: 8080
+        env: 
+        - name: DATABASE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: mongo-root-username
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: mongo-root-password
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: mongodb-configmap
+              key: database_url 
+        - name: SPRING_PROFILES_ACTIVE
+          value: prod
+---
+apiVersion: v1 
+kind: Service 
+metadata: 
+  name: gff-service
+spec: 
+  selector: 
+    app: gff
+  type: LoadBalancer
+  ports: 
+    - protocol: TCP 
+      port: 8080
+      targetPort: 8080
+      nodePort: 30001
