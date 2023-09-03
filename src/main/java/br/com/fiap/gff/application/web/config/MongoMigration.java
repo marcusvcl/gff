@@ -32,17 +32,17 @@ public class MongoMigration {
             Collection<Cliente> clientes = clienteGateway.obterTodosClientes();
             if (clientes.size() != 0)
                 return;
-            MigrateCollection("src/main/java/br/com/fiap/gff/application/web/config/migrations/categorias.txt",
+            MigrateCollection("src/main/resources/migrations/categorias.txt",
                     "categorias");
-            MigrateCollection("src/main/java/br/com/fiap/gff/application/web/config/migrations/clientes.txt",
+            MigrateCollection("src/main/resources/migrations/clientes.txt",
                     "clientes");
-            MigrateCollection("src/main/java/br/com/fiap/gff/application/web/config/migrations/produtos.txt",
+            MigrateCollection("src/main/resources/migrations/produtos.txt",
                     "produtos");
-            MigrateCollection("src/main/java/br/com/fiap/gff/application/web/config/migrations/pedidos.txt",
+            MigrateCollection("src/main/resources/migrations/pedidos.txt",
                     "pedidos");
         } catch (Exception e) {
             log.warn("The migration has failed.");
-            e.getStackTrace();
+            log.warn(e.getMessage());
         }
     }
 
