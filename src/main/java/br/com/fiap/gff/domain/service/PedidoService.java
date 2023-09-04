@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.stereotype.Service;
 
+import br.com.fiap.gff.domain.enums.StatusPagamentoEnum;
 import br.com.fiap.gff.domain.exceptions.RecursoNaoEncontradoException;
 import br.com.fiap.gff.domain.exceptions.RequisicaoInvalidaException;
 import br.com.fiap.gff.domain.gateway.PedidoGateway;
@@ -49,10 +50,16 @@ public class PedidoService implements PedidoUseCase {
     }
 
     @Override
+    public StatusPagamentoEnum obterStatusDoPagamento(String id) {
+        return gateway.obterStatusDoPagamento(id);
+    }
+
+    @Override
     public Pedido criarPedido(Pedido pedido) {
         validarClienteDoPedido(pedido.getCliente());
         validarProdutosDoPedido(pedido.getItems());
         pedido.calcularTotalPedido();
+        pedido.getPagamento().setStatus(StatusPagamentoEnum.PENDENTE);
         return gateway.salvarPedido(pedido);
     }
 
