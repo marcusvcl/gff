@@ -7,6 +7,7 @@ import java.util.Collection;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import br.com.fiap.gff.domain.enums.StatusPagamentoEnum;
 import br.com.fiap.gff.domain.enums.StatusPedidoEnum;
 import br.com.fiap.gff.domain.enums.TipoDePagamentoEnum;
 import lombok.AllArgsConstructor;
@@ -61,5 +62,6 @@ public class PedidoEntity implements Serializable {
         private TipoDePagamentoEnum tipoDePagamento;
         private String transacaoId;
         private double valorPago;
+        private StatusPagamentoEnum status;
     }
 }

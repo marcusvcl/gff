@@ -1,17 +1,18 @@
 package br.com.fiap.gff.infrastructure.persistence;
 
-import lombok.RequiredArgsConstructor;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
+import br.com.fiap.gff.domain.enums.StatusPagamentoEnum;
 import br.com.fiap.gff.domain.gateway.PedidoGateway;
 import br.com.fiap.gff.domain.model.entities.Pedido;
 import br.com.fiap.gff.infrastructure.persistence.entities.PedidoEntity;
 import br.com.fiap.gff.infrastructure.persistence.mappers.PedidoPersistenceMapper;
 import br.com.fiap.gff.infrastructure.persistence.repositories.PedidoRepository;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
@@ -47,6 +48,12 @@ public class PedidoGatewayImpl implements PedidoGateway {
     public Collection<Pedido> obterTodosPedidos() {
         List<PedidoEntity> entities = repository.findAll();
         return entities.stream().map(mapper::toModel).toList();
+    }
+
+    @Override
+    public StatusPagamentoEnum obterStatusDoPagamento(String id) {
+        Optional<PedidoEntity> entity = repository.findById(id);
+        return entity.stream().map(x -> x.getPagamento().getStatus()).findFirst().orElse(null);
     }
 
     @Override

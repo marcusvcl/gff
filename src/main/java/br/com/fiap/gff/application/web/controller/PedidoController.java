@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fiap.gff.application.web.dto.request.CreatePedidoRequest;
 import br.com.fiap.gff.application.web.dto.request.UpdatePedidoRequest;
 import br.com.fiap.gff.application.web.mapper.PedidoRestMapper;
+import br.com.fiap.gff.domain.enums.StatusPagamentoEnum;
 import br.com.fiap.gff.domain.model.entities.Pedido;
 import br.com.fiap.gff.domain.usecase.PedidoUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,6 +36,13 @@ public class PedidoController {
     public ResponseEntity<Collection<Pedido>> obterTodosPedidos() {
         var Pedidos = useCase.obterTodosPedidos();
         return new ResponseEntity<>(Pedidos, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/pedidos/{id}/pagamento/status")
+    @Operation(summary = "Obtém o status de um pagamento de um pedido a partir do id")
+    public ResponseEntity<StatusPagamentoEnum> obterStatusPagamento(@PathVariable String id) {
+        var statusPagamento = useCase.obterStatusDoPagamento(id);
+        return new ResponseEntity<>(statusPagamento, HttpStatus.OK);
     }
 
     @PostMapping(value = "/pedidos")
