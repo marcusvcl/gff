@@ -41,8 +41,6 @@ O swagger da aplicação pode ser acessado pela seguinte url:
 
 http://IP:Port/swagger-ui/index.html
 
-<br>
-
 No swagger você encontrará as rotas de utilização que a API proporciona.
 
 O Ip e porta pode variar de acordo com a feramenta local de kubernetes.
