@@ -14,7 +14,7 @@ O sistema de gerenciamento de Fast Food tem como objetivo sanar a necessidade de
 - [Docker](https://docs.docker.com/)
 - [MongoDB](https://www.mongodb.com/)
 - [Swagger](https://swagger.io/docs/specification/about/)
-- [Docker Composer](https://docs.docker.com/compose/install/)
+- [Kubernetes](https://kubernetes.io/docs/tasks/tools/#kubectl)
 
 <br>
 
@@ -25,7 +25,7 @@ Após instalar as tecnologias segua os seguintes passos:
 <br>
 - 1° - Baixe o diretório para uma pasta local de sua máquina.
 - 2° - Abra o terminal no diretório na qual você fez o download da pasta do programa.
-- 3° - Utilize o comando a seguir para subir a aplicação via docker compose:
+- 3° - Utilize o comando a seguir para subir a aplicação via kubernetes:
 <br>
 
 ```bash
@@ -38,10 +38,12 @@ Desta forma a aplicação estará rodando no cluster, caso esteja utilizando o m
 ```
 
 O swagger da aplicação pode ser acessado pela seguinte url: http://IP:Port/swagger-ui/index.html
-
-Para acessar o Swagger da aplicação acesse em um browser de sua preferência o link:
-<br>
-
-[http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
-
 No swagger você encontrará as rotas de utilização que a API proporciona.
+
+O Ip e porta pode variar de acordo com a feramenta local de kubernetes.
+Caso esteja utilizando o minikube e queira saber o ip, basta executar o comando:
+
+```bash
+minikube ip
+```
+
