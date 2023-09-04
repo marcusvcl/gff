@@ -29,9 +29,15 @@ Após instalar as tecnologias segua os seguintes passos:
 <br>
 
 ```bash
-    docker compose -f compose.yaml up
+    kubectl apply -f k8s/.
 ```
-Desta forma a aplicação estará funcionando.
+Desta forma a aplicação estará rodando no cluster, caso esteja utilizando o minikube usar o seguinte comando para conseguir acessar a aplicação:
+
+```bash
+    minikube service gff-service
+```
+
+O swagger da aplicação pode ser acessado pela seguinte url: http://IP:Port/swagger-ui/index.html
 
 Para acessar o Swagger da aplicação acesse em um browser de sua preferência o link:
 <br>
