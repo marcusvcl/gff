@@ -37,7 +37,11 @@ Desta forma a aplicação estará rodando no cluster, caso esteja utilizando o m
     minikube service gff-service
 ```
 
-O swagger da aplicação pode ser acessado pela seguinte url: http://IP:Port/swagger-ui/index.html
+O swagger da aplicação pode ser acessado pela seguinte url: 
+
+<br>
+
+http://IP:Port/swagger-ui/index.html
 No swagger você encontrará as rotas de utilização que a API proporciona.
 
 O Ip e porta pode variar de acordo com a feramenta local de kubernetes.
